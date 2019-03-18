@@ -17,3 +17,6 @@ server:
   servlet:
     context-path: /app
 
+mybatis:
+  typeAliasesPackage: com.jk.model
+  mapperLocations: classpath:mapper/*.xml

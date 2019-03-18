@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.CompanyMapper">
+<select id="queryCompany" resultType="com.jk.bean.CompanyBean">
+SELECT t.id id,
+            t.company_name as companyName,
+            t.company_emall as companyEmall,
+            contact as contact,
+            create_time as createTime,
+            user_name  as userName,
+            user_id  as userIdl,
+            company_phone as companyPhone
+            FROM
+            t_company t
+    <include refid="queryPage"></include>
+            GROUP BY
+            t.id
+            LIMIT #{start},#{rows}
+</select>
+    <select id="queryUserTotal" parameterType="com.jk.bean.CompanyBean" resultType="long">
+        select  count(*) from t_company t <include refid="queryPage"></include>
+    </select>
+
+<insert id="addCompany" parameterType="com.jk.bean.CompanyBean">
+insert  into t_company(company_emall,company_name,company_phone,contact,create_time,user_name,user_id)
+values (#{companyEmall},#{companyName},#{companyPhone},#{contact},#{createTime},#{userName},1)
+</insert>
+
+    <sql id="queryPage">
+      where 1 = 1
+   <if test="companyBean.companyName!=null and companyBean.companyName!=''">
+       and  t.company_name like '%${companyBean.companyName}%'
+   </if>
+    </sql>
+</mapper>

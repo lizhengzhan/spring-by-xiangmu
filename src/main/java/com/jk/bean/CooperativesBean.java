@@ -2,6 +2,9 @@ package com.jk.bean;
 
 import javax.persistence.*;
 
+/**
+ * 合作企业
+ */
 @Entity
 @Table(name = "t_cooperatives")
 public class CooperativesBean {
