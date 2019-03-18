@@ -23,5 +23,13 @@ public class CompanyController {
     }
 
 
+    @RequestMapping("addCompany")
+    @ResponseBody
+    public  void addCompany(CompanyBean companyBean) {
+        System.out.println("com");
+        companyService.addCompany(companyBean);
+
+    }
+
 
 }

@@ -27,7 +27,7 @@
         </div>
         <div class="navbar-right">
             <a class="navbar-brand" href="#">
-                欢迎你
+                欢迎！！！${sessionScope.user.userName }登陆本后台管理系统！
             </a>
         </div>
     </div>
@@ -35,7 +35,7 @@
 <div class="container-fluid" style="margin-top:70px">
     <div class="row">
         <div class="col-md-2">
-            <div id="myTree"></div>
+            <div id="myTree" class="panel-group" id="accordion1"></div>
         </div>
         <div class="col-md-10">
             <div id="myTabs">
@@ -75,8 +75,10 @@
                         $.addtabs.add({
                             id:node.id,
                             title:node.text,
-                            url:"<%=request.getContextPath() %>" + node.href
-                        });
+                            url:"<%=request.getContextPath() %>" + node.href,
+                            parent:'#accordion1',
+                            toggle:false
+                    });
                     }
                 })
             }

@@ -1,10 +1,12 @@
 package com.jk.service;
 
+
+
 import com.jk.bean.CooperativesBean;
 
-import java.util.List;
+import java.util.HashMap;
 
 public interface CooperativesService {
 
-    List<CooperativesBean>  queryCooperative();
+    HashMap<String, Object> queryCooperatives(Integer page, Integer rows, CooperativesBean  cooperativesBean);
 }
