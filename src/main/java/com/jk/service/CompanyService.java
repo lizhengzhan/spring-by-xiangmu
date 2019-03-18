@@ -10,4 +10,5 @@ public interface CompanyService {
     HashMap<String, Object> queryCompany(Integer page, Integer rows, CompanyBean  companyBean);
 
 
+
 }
