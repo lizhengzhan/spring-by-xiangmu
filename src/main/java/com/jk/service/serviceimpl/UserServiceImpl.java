@@ -22,7 +22,8 @@ public class UserServiceImpl implements UserServiec {
         long total = userMapper.queryUserTotal(userBean);
         //查询显示信息
         //开始位置
-        List<UserBean> list = userMapper.queryUser((page-1)*rows,rows,userBean);
+        Integer start = (page-1)*rows;
+        List<UserBean> list = userMapper.queryUser(start,rows,userBean);
         hashMap.put("total", total);
         hashMap.put("rows", list);
         return hashMap;

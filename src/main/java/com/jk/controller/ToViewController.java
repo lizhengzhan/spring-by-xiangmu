@@ -33,4 +33,9 @@ public class ToViewController {
     }
 
 
+    @RequestMapping("toUser")
+    public  String  toUser() {
+        return "user/list";
+    }
+
 }

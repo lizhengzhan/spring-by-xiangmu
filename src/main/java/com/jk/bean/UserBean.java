@@ -1,5 +1,7 @@
 package com.jk.bean;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,8 +11,8 @@ public class UserBean {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "useruid")
-    private Integer useruId;
+    @Column(name = "userid")
+    private Integer userId;
 
     @Column(name = "username")
     private String userName;
@@ -22,24 +24,25 @@ public class UserBean {
     private Integer userSex;
 
     @Column(name = "userbirthday")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="yyyy-MM-dd HH-mm-ss")
     private Date userBirthday;
 
     @Column(name = "roleid")
     private Integer roleId;
 
-    @Column(name = "")
 
     //业务字段
 
     @Transient
     private String rplename;
 
-    public Integer getUseruId() {
-        return useruId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUseruId(Integer useruId) {
-        this.useruId = useruId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
