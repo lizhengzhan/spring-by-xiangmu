@@ -12,4 +12,16 @@ public interface CompanyService {
 
 //新增
     void  addCompany(CompanyBean  companyBean);
+
+    //回显
+    CompanyBean  queryCompanyById(Integer  id);
+
+
+    //批量删除
+    void  deleteAll(String[]  ids);
+
+    //联系
+    void  relation(Integer id);
+    //等待联系
+    void  await(Integer id);
 }
