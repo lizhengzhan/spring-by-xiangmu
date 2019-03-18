@@ -24,7 +24,13 @@ public class ToViewController {
     }
 
     @RequestMapping("toCompany")
-    public  String  toCompany(){
-        return  "company/list";
+    public  String  toCompany() {
+        return "company/list";
     }
+    @RequestMapping("toCooperatives")
+    public  String  toCooperatives(){
+        return  "Cooperatives/show";
+    }
+
+
 }

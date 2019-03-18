@@ -16,6 +16,7 @@ public class CompanyServiceImpl implements CompanyService {
     private CompanyMapper   companyMapper;
 
 
+
     @Override
     public HashMap<String, Object> queryCompany(Integer page, Integer rows, CompanyBean companyBean) {
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -29,4 +30,5 @@ public class CompanyServiceImpl implements CompanyService {
         hashMap.put("rows", list);
         return hashMap;
     }
-}
+
+    }

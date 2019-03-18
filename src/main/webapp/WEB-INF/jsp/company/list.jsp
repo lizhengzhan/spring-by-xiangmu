@@ -30,9 +30,12 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/js/bootstrap-fileinput/css/fileinput.css">
 </head>
 <body>
-    <table class="table" id="myTable"></table>
+
+      <table class="table" id="myTable"></table>
+
 </body>
 <SCRIPT>
+
 
     $(function () {
         initCompanyTable();
