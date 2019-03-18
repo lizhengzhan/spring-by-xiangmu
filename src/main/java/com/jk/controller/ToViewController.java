@@ -27,4 +27,19 @@ public class ToViewController {
     public  String  toCompany(){
         return  "company/list";
     }
+
+    @RequestMapping("toService")
+    public String toService(){
+        return "server/list";
+    }
+
+    @RequestMapping("toAdd")
+    public String toAdd(){
+        return "adduser";
+    }
+
+    @RequestMapping("toUpdate")
+    public String toUpdate(){
+        return "updateuser";
+    }
 }
