@@ -37,6 +37,12 @@ public class ToViewController {
         return "company/addCompany";
 
     }
+
+    @RequestMapping("toYiXiang")
+    public  String  toYiXiang(){
+        return  "jinrong/list";
+    }
+
     @RequestMapping("toUser")
     public  String  toUser() {
         return "user/list";
