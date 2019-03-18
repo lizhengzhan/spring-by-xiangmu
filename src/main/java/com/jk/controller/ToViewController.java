@@ -27,4 +27,10 @@ public class ToViewController {
     public  String  toCompany(){
         return  "company/list";
     }
+
+    //车辆品牌
+    @RequestMapping("toBrand")
+    public  String  toBrand(){
+        return  "brand/brandList";
+    }
 }
