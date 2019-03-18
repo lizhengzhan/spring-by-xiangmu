@@ -27,6 +27,7 @@ public class UserBean {
     @Column(name = "roleid")
     private Integer roleId;
 
+    @Column(name = "")
 
     //业务字段
 

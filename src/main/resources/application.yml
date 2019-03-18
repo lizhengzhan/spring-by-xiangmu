@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/matilda?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://192.168.1.157:3306/qiche
     username: root
-    password: 771662
+    password: 123
   jpa:
     show-sql: true
     hibernate:
