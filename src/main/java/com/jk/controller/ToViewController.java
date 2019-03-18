@@ -27,4 +27,10 @@ public class ToViewController {
     public  String  toCompany(){
         return  "company/list";
     }
+
+    @RequestMapping("toYiXiang")
+    public  String  toYiXiang(){
+        return  "jinrong/list";
+    }
+
 }
