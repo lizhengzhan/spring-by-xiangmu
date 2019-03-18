@@ -32,7 +32,11 @@ public class ToViewController {
         return  "Cooperatives/show";
     }
 
+    @RequestMapping("toAdd")
+    public  String  toAdd(){
+        return "company/addCompany";
 
+    }
     @RequestMapping("toUser")
     public  String  toUser() {
         return "user/list";

@@ -29,5 +29,6 @@ public interface CompanyMapper {
     List<CompanyBean> queryCompany(@Param("start") int start, @Param("rows")Integer rows, @Param("companyBean")CompanyBean companyBean);
 
 
-
+    //新增
+    void addCompany(CompanyBean companyBean);
 }

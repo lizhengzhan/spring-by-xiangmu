@@ -30,16 +30,51 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/js/bootstrap-fileinput/css/fileinput.css">
 </head>
 <body>
-
+<div id="toolbar">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="companyName">企业名称</label>
+            <input type="text" class="form-control" id="companyName" placeholder="请输入企业名称">
+        </div>
+        <button onclick="searchUser()" type="button" class="btn btn-info glyphicon glyphicon-search">搜索</button>
+        <button onclick="openAdd()" type="button" class="btn btn-info glyphicon glyphicon-plus">新增</button>
+    </form>
+</div>
       <table class="table" id="myTable"></table>
 
 </body>
 <SCRIPT>
-
-
-    $(function () {
+    $(function(){
         initCompanyTable();
+        $('.date').datetimepicker({
+            language: 'zh-CN',//显示中文
+            //format: 'yyyy-mm-dd hh:ii:ss',//显示格式
+            format: 'yyyy-mm-dd',//显示格式
+            minView: "month",//设置只显示到月份
+            initialDate: new Date(),//初始化当前日期
+            autoclose: true,//选中自动关闭
+            todayBtn: true//显示今日按钮
+        });
     })
+
+    var res;
+    function createAddContent(url){
+        $.ajax({
+            url:url,
+            async:false,
+            success:function(data){
+                res = data;
+            }
+        });
+        return res;
+    }
+
+    function searchUser(){
+        $('#myTable').bootstrapTable('refresh');//刷新表格
+    }
+
+
+
     //初始化表格数据
     function initCompanyTable(){
         $("#myTable").bootstrapTable({
@@ -53,7 +88,7 @@
                 return {
                     page:this.pageNumber,
                     rows:this.pageSize,
-                    name:$("#username").val()
+                    companyName:$("#companyName").val()
                 };
             },
             sidePagination:'server',//分页方式：client客户端分页，server服务端分页
@@ -68,6 +103,40 @@
                 {field:"contact",title:"是否联系"}
             ]
         })
+    }
+
+    //打开添加页面
+    function openAdd(){
+        bootbox.dialog({
+            title:'添加用户信息',
+            message: createAddContent("<%=request.getContextPath() %>/toAdd"),
+            closeButton: true,
+            buttons : {
+                "success" : {
+                    "label" : "<i class='glyphicon glyphicon-ok'></i> 保存",
+                    "className" : "btn-sm btn-success",
+                    "callback" : function() {
+                        $.ajax({
+                            url:'<%=request.getContextPath() %>/addCompany',
+                            type:'post',
+                            data:$("#myForm").serialize(),
+                            success:function(data){
+                                //$('#myTable').bootstrapTable('refresh');
+                                searchUser();
+                            }
+                        });
+                    }
+                },
+                "cancel" : {
+                    "label" : "<i class='glyphicon glyphicon-remove'></i> 取消",
+                    "className" : "btn-sm btn-danger",
+                    "callback" : function() {
+
+                    }
+                }
+            }
+
+        });
     }
 
 </SCRIPT>
