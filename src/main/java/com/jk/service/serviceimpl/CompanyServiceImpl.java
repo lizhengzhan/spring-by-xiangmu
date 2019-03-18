@@ -31,4 +31,9 @@ public class CompanyServiceImpl implements CompanyService {
         return hashMap;
     }
 
+    @Override
+    public void addCompany(CompanyBean companyBean) {
+        companyMapper.addCompany(companyBean);
     }
+
+}

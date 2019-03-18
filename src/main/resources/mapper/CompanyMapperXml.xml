@@ -12,13 +12,24 @@ SELECT t.id id,
             company_phone as companyPhone
             FROM
             t_company t
+    <include refid="queryPage"></include>
             GROUP BY
             t.id
             LIMIT #{start},#{rows}
 </select>
     <select id="queryUserTotal" parameterType="com.jk.bean.CompanyBean" resultType="long">
-        select  count(*) from t_company
+        select  count(*) from t_company t <include refid="queryPage"></include>
     </select>
 
+<insert id="addCompany" parameterType="com.jk.bean.CompanyBean">
+insert  into t_company(company_emall,company_name,company_phone,contact,create_time,user_name,user_id)
+values (#{companyEmall},#{companyName},#{companyPhone},#{contact},#{createTime},#{userName},1)
+</insert>
 
+    <sql id="queryPage">
+      where 1 = 1
+   <if test="companyBean.companyName!=null and companyBean.companyName!=''">
+       and  t.company_name like '%${companyBean.companyName}%'
+   </if>
+    </sql>
 </mapper>
