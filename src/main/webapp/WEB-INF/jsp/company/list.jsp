@@ -33,11 +33,12 @@
 <div id="toolbar">
     <form class="form-inline">
         <div class="form-group">
-            <label for="companyName">企业名称</label>
-            <input type="text" class="form-control" id="companyName" placeholder="请输入企业名称">
+            <label for="companyNames">企业名称</label>
+            <input type="text" class="form-control" id="companyNames" placeholder="请输入企业名称">
         </div>
+        <button onclick="delUser()" type="button" class="btn btn-danger glyphicon glyphicon-minus">删除</button>
         <button onclick="searchUser()" type="button" class="btn btn-info glyphicon glyphicon-search">搜索</button>
-        <button onclick="openAdd()" type="button" class="btn btn-info glyphicon glyphicon-plus">新增</button>
+        <button onclick="openAdd()" type="button" class="btn btn-success glyphicon glyphicon-plus">新增</button>
     </form>
 </div>
       <table class="table" id="myTable"></table>
@@ -70,7 +71,7 @@
     }
 
     function searchUser(){
-        $('#myTable').bootstrapTable('refresh');//刷新表格
+        $('#myTable').bootstrapTable('refresh')
     }
 
 
@@ -84,11 +85,14 @@
             pageList:[5, 10, 20, 50],//分页组件
             pageNumber:1,
             pageSize:5,//默认每页条数
+            dropZoneEnabled: false,
+            height: 650,
+            showRefresh: true,
             queryParams:function(){
                 return {
                     page:this.pageNumber,
                     rows:this.pageSize,
-                    companyName:$("#companyName").val()
+                    companyName:$("#companyNames").val()
                 };
             },
             sidePagination:'server',//分页方式：client客户端分页，server服务端分页
@@ -100,7 +104,16 @@
                 {field:"companyEmall",title:"企业邮箱"},
                 {field:"userName",title:"企业董事"},
                 {field:"createTime",title:"企业创建时间"},
-                {field:"contact",title:"是否联系"}
+                {field:"contact",title:"是否联系",formatter:function(value,row,index){
+                        return value==1?"联系":value==0?"等会联系":"";
+                }},
+                {field:"tools",title:"操作",formatter:function(value,row,index){
+                        return "<button  class=\"btn btn-warning\"><a href='javascript:openUpdate("+row.id+")'>修改</a></button>\n";
+                    }},
+                {field:"toolss",title:"",formatter:function(value,row,index){
+
+                        return row.contact==1?"<button  class=\"btn btn-success\"><a href='javascript:openRelation("+row.id+")'>取消联系</a></button>\n":row.contact==0?"<button  class=\"btn btn-default\"><a href='javascript:openAawait("+row.id+")'>联系</a></button>\n":"";
+                    }}
             ]
         })
     }
@@ -137,6 +150,209 @@
             }
 
         });
+    }
+
+
+    //打开修改页面
+    function openUpdate(id){
+        bootbox.dialog({
+            title:'修改用户信息',
+            message: createAddContent("<%=request.getContextPath() %>/updateCompany"),
+            closeButton: true,
+            buttons : {
+                "success" : {
+                    "label" : "<i class='glyphicon glyphicon-ok'></i> 保存",
+                    "className" : "btn-sm btn-success",
+                    "callback" : function() {
+                        $.ajax({
+                            url:'<%=request.getContextPath() %>/addCompany',
+                            type:'post',
+                            data:$("#myForm").serialize(),
+                            success:function(data){
+                                //$('#myTable').bootstrapTable('refresh');
+                                searchUser();
+                            }
+                        });
+                    }
+                },
+                "cancel" : {
+                    "label" : "<i class='glyphicon glyphicon-remove'></i> 取消",
+                    "className" : "btn-sm btn-danger",
+                    "callback" : function() {
+
+                    }
+                }
+            }
+
+        });
+        //回显数据
+        $.ajax({
+            url:"<%=request.getContextPath() %>/queryCompanyById",
+            type:"post",
+            data:{id:id},
+            async:false,
+            success:function(data){
+                //alert(data);
+                $("#id").val(data.id);
+                $("#companyName").val(data.companyName);
+                $("#companyPhone").val(data.companyPhone);
+                $("#companyEmall").val(data.companyEmall);
+                $("#userName").val(data.userName);
+                $("#createTime").val(data.createTime);
+                $("input[name='contact']").each(function(){
+                    var sexId = $(this).val();
+                    if(sexId==data.contact){
+                        $(this).prop("checked",true);
+                    }
+                });
+            }
+        })
+    }
+
+
+    //删除用户
+    function delUser(){
+        //bootbox.alert("Your message here…");
+        bootbox.confirm({
+            size: "small",
+            title:"提示",
+            message: "是否确认删除",
+            buttons: {
+                confirm: {
+                    label: '确定',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: '取消',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function(result){
+                if(result){
+                    var arr = $('#myTable').bootstrapTable('getSelections'); //获取表选择的行
+                    var ids = "";
+                    for(var i=0;i<arr.length;i++){
+                        ids+=ids==""?arr[i].id:","+arr[i].id;
+                    }
+                    $.ajax({
+                        url:"<%=request.getContextPath() %>/deleteAll",
+                        type:"post",
+                        data:{ids:ids},
+                        success:function(){
+                            bootbox.alert({
+                                size: "small",
+                                title: "提示",
+                                message: "删除成功！",
+                                buttons: {
+                                    ok: {
+                                        label: '确定',
+                                        className: 'btn-success'
+                                    }
+                                },
+                                callback: function(){}
+                            })
+                            searchUser();//刷新表格
+                        }
+                    })
+                }
+            }
+        })
+    }
+    //联系
+    function openRelation(){
+        //bootbox.alert("Your message here…");
+        bootbox.confirm({
+            size: "small",
+            title:"提示",
+            message: "是否确认联系",
+            buttons: {
+                confirm: {
+                    label: '确定',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: '取消',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function(result){
+                if(result){
+                    var arr = $('#myTable').bootstrapTable('getSelections'); //获取表选择的行
+                    var ids = "";
+                    for(var i=0;i<arr.length;i++){
+                        ids+=ids==""?arr[i].id:","+arr[i].id;
+                    }
+                    $.ajax({
+                        url:"<%=request.getContextPath() %>/await",
+                        type:"post",
+                        data:{ids:ids},
+                        success:function(){
+                            bootbox.alert({
+                                size: "small",
+                                title: "提示",
+                                message: "联系成功！",
+                                buttons: {
+                                    ok: {
+                                        label: '确定',
+                                        className: 'btn-success'
+                                    }
+                                },
+                                callback: function(){}
+                            })
+                            searchUser();//刷新表格
+                        }
+                    })
+                }
+            }
+        })
+    }
+    //等会联系
+    function openAawait(){
+        //bootbox.alert("Your message here…");
+        bootbox.confirm({
+            size: "small",
+            title:"提示",
+            message: "是否确认等会联系",
+            buttons: {
+                confirm: {
+                    label: '确定',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: '取消',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function(result){
+                if(result){
+                    var arr = $('#myTable').bootstrapTable('getSelections'); //获取表选择的行
+                    var ids = "";
+                    for(var i=0;i<arr.length;i++){
+                        ids+=ids==""?arr[i].id:","+arr[i].id;
+                    }
+                    $.ajax({
+                        url:"<%=request.getContextPath() %>/relation",
+                        type:"post",
+                        data:{ids:ids},
+                        success:function(){
+                            bootbox.alert({
+                                size: "small",
+                                title: "提示",
+                                message: "联系成功！",
+                                buttons: {
+                                    ok: {
+                                        label: '确定',
+                                        className: 'btn-success'
+                                    }
+                                },
+                                callback: function(){}
+                            })
+                            searchUser();//刷新表格
+                        }
+                    })
+                }
+            }
+        })
     }
 
 </SCRIPT>
