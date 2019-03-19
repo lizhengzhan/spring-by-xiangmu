@@ -117,10 +117,10 @@
                     <div class="span6">
                         <%--纳税人识别号--%>
                         <div class="col-md-2">
-                            <label for="registrationNumber">纳税人识别号:</label>
+                            <label for="registration">纳税人识别号:</label>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="registrationNumber" id="registrationNumber">
+                            <input type="text" class="form-control" name="registration" id="registration">
                         </div>
                     </div>
                 </div>
