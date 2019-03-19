@@ -33,7 +33,34 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void addCompany(CompanyBean companyBean) {
-        companyMapper.addCompany(companyBean);
+        Integer id = companyBean.getId();
+        if (id != null) {
+            companyMapper.updateCompany(companyBean);
+        } else {
+            companyMapper.addCompany(companyBean);
+        }
+
     }
+
+    @Override
+    public CompanyBean queryCompanyById(Integer id) {
+        return companyMapper.queryCompanyById(id);
+    }
+
+    @Override
+    public void deleteAll(String[] ids) {
+        companyMapper.deleteAll(ids);
+    }
+
+    @Override
+    public void relation(Integer id) {
+        companyMapper.relation(id);
+    }
+
+    @Override
+    public void await(Integer id) {
+        companyMapper.await(id);
+    }
+
 
 }

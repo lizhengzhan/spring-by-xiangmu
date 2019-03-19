@@ -53,4 +53,10 @@ public class ToViewController {
     public String toUpdate(){
         return "server/updateuser";
     }
+
+    @RequestMapping("toYiXiang")
+    public  String  toYiXiang(){
+        return  "jinrong/list";
+    }
+
 }
