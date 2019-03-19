@@ -28,4 +28,8 @@ GROUP BY
         select  count(*)  from  t_cooperatives
     </select>
 
+	<insert id="addCooperativen" parameterType="com.jk.bean.CooperativesBean">
+		insert into t_cooperatives (capital,company_type,credit_union_code,email,info,officer_net,organization_code,phone,registration,registration_number,site)
+		values (#{capital},#{companyType},#{creditUnionCode},#{email},#{info},#{officerNet},#{organizationCode},#{phone},#{registration},#{registrationNumber},#{site})
+	</insert>
 </mapper>

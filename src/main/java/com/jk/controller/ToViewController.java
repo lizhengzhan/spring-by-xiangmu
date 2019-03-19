@@ -59,4 +59,31 @@ public class ToViewController {
         return  "jinrong/list";
     }
 
+
+    @RequestMapping("toAddCooper")
+    public   String  toAddCooper(){
+        return  "Cooperatives/addCooper";
+    }
+
+    @RequestMapping("toUser")
+    public  String  toUser() {
+        return "user/list";
+    }
+
+    @RequestMapping("toUserAdd")
+    public String toUserAdd(){
+        return "user/add";
+    }
+
+    //车辆品牌
+    @RequestMapping("toBrand")
+    public  String  toBrand(){
+        return  "brand/brandList";
+    }
+
+    //跳转买车新增页面
+    @RequestMapping("toBrandAdd")
+    public String toBrandAdd(){
+        return "brand/brandAdd";
+    }
 }

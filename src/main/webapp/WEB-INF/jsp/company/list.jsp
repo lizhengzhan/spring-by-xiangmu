@@ -121,7 +121,7 @@
     //打开添加页面
     function openAdd(){
         bootbox.dialog({
-            title:'添加用户信息',
+            title:'添加企业信息',
             message: createAddContent("<%=request.getContextPath() %>/toAdd"),
             closeButton: true,
             buttons : {
@@ -156,7 +156,7 @@
     //打开修改页面
     function openUpdate(id){
         bootbox.dialog({
-            title:'修改用户信息',
+            title:'修改企业信息',
             message: createAddContent("<%=request.getContextPath() %>/updateCompany"),
             closeButton: true,
             buttons : {
