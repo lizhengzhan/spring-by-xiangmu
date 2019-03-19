@@ -38,7 +38,7 @@
                 <input type="text" class="form-control" id="brandName" placeholder="请输入品牌名称">
             </div>
             <button onclick="searchBrand()" type="button" class="btn btn-info glyphicon glyphicon-search">搜索</button>
-            <button onclick="openAdd()" type="button" class="btn btn-info glyphicon glyphicon-plus">新增</button>
+            <button onclick="openAdd()" type="button" class="btn btn-info glyphicon glyphicon-plus">发布</button>
             <button onclick="delBrand()" type="button" class="btn btn-warning glyphicon glyphicon-minus">删除</button>
         </form>
     </div>
@@ -50,6 +50,51 @@
     $(function () {
         initBrandTable();
     })
+
+    var res;
+    function createAddContent(url){
+        $.ajax({
+            url:url,
+            async:false,
+            success:function(data){
+                res = data;
+            }
+        });
+        return res;
+    }
+
+    //打开添加页面
+    function openAdd(){
+        bootbox.dialog({
+            title:'发布买车信息',
+            message: createAddContent("<%=request.getContextPath() %>/toBrandAdd"),
+            closeButton: true,
+            buttons : {
+                "success" : {
+                    "label" : "<i class='glyphicon glyphicon-ok'></i> 发布",
+                    "className" : "btn-sm btn-success",
+                    "callback" : function() {
+                        $.ajax({
+                            url:'<%=request.getContextPath() %>/addBrand',
+                            type:'post',
+                            data:$("#myForm").serialize(),
+                            success:function(data){
+                                searchBrand();
+                            }
+                        });
+                    }
+                },
+                "cancel" : {
+                    "label" : "<i class='glyphicon glyphicon-remove'></i> 取消",
+                    "className" : "btn-sm btn-danger",
+                    "callback" : function() {
+
+                    }
+                }
+            }
+
+        });
+    }
 
     //删除用户
     function delBrand(){
@@ -112,11 +157,12 @@
             pageList:[5, 10, 20, 50],//分页组件
             pageNumber:1,
             pageSize:5,//默认每页条数
+            height:500,
             queryParams:function(){
                 return {
                     page:this.pageNumber,
                     rows:this.pageSize,
-                    name:$("#brandName").val()
+                    brandName:$("#brandName").val()
                 };
             },
             sidePagination:'server',//分页方式：client客户端分页，server服务端分页

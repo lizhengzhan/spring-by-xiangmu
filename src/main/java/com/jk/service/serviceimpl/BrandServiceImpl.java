@@ -16,14 +16,14 @@ public class BrandServiceImpl implements BrandService {
     private BrandMapper brandMapper;
 
     @Override
-    public HashMap<String, Object> queryBrandList(Integer page, Integer rows, BrandBean brand) {
+    public HashMap<String, Object> queryBrandList(Integer page, Integer rows, BrandBean brandBean) {
         HashMap<String, Object> hashMap = new HashMap<>();
 
-        long total = brandMapper.queryBrandListToal(brand);
+        long total = brandMapper.queryBrandListToal(brandBean);
 
         int start = (page-1)*rows;
 
-        List<BrandBean> list = brandMapper.queryBrandList(start,rows,brand);
+        List<BrandBean> list = brandMapper.queryBrandList(start,rows,brandBean);
 
         hashMap.put("total", total);
         hashMap.put("rows", list);

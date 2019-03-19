@@ -7,7 +7,7 @@ import java.util.HashMap;
 public interface BrandService {
 
     //分页查询
-    HashMap<String, Object> queryBrandList(Integer page, Integer rows, BrandBean brand);
+    HashMap<String, Object> queryBrandList(Integer page, Integer rows, BrandBean brandBean);
 
     //新增
     void addBrand(BrandBean brand);
