@@ -30,32 +30,18 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/js/bootstrap-fileinput/css/fileinput.css">
 </head>
 <body>
-<%--<div id="toolbar">
-    <form class="form-inline">
-        <div class="form-group">
-            <label for="companyName">企业名称</label>
-            <input type="text" class="form-control" id="companyName" placeholder="请输入企业名称">
-        </div>
-        <button onclick="searchUser()" type="button" class="btn btn-info glyphicon glyphicon-search">搜索</button>
-        <button onclick="openAdd()" type="button" class="btn btn-info glyphicon glyphicon-plus">新增</button>
-    </form>
-</div>--%>
 <div class="panel-body" style="padding-bottom:0px;">
     <div class="panel panel-default">
         <div class="panel-heading">查询条件</div>
         <div class="panel-body">
             <form id="formSearch" class="form-horizontal">
                 <div class="form-group" style="margin-top:10px">
-                    <label class="control-label col-sm-1" for="txt_search_departmentname">部门名称</label>
+                    <label class="control-label col-sm-1" for="userName">用户名称</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" id="txt_search_departmentname">
-                    </div>
-                    <label class="control-label col-sm-1" for="txt_search_statu">状态</label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" id="txt_search_statu">
+                        <input type="text" class="form-control" id="userName">
                     </div>
                     <div class="col-sm-4" style="text-align:left;">
-                        <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
+                        <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary" onclick="searchUser()">查询</button>
                     </div>
                 </div>
             </form>
@@ -63,13 +49,10 @@
     </div>
     <div id="toolbars" class="btn-group">
     <button id="btn_add" type="button" class="btn btn-default">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        <span class="glyphicon glyphicon-plus" aria-hidden="true" onclick="openAdd()">新增</span>
     </button>
-    <%--<button id="btn_edit" type="button" class="btn btn-default">
-        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
-    </button>--%>
     <button id="btn_delete" type="button" class="btn btn-default">
-        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        <span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="delUser()">删除</span>
     </button>
 </div>
 <table class="table" id="myTable"></table>
@@ -103,11 +86,59 @@
         return res;
     }
 
+    //批量删除
+    function delUser(){
+        bootbox.confirm({
+            size: "small",
+            title:"提示",
+            message: "是否确认删除",
+            buttons: {
+                confirm: {
+                    label: '确定',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: '取消',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function(result){
+                if(result){
+                    var arr = $('#myTable').bootstrapTable('getSelections'); //获取表选择的行
+                    var ids = "";
+                    for(var i=0;i<arr.length;i++){
+                        ids+=ids==""?arr[i].userId:","+arr[i].userId;
+                    }
+                    $.ajax({
+                        url:"<%=request.getContextPath() %>/user/delUserAll",
+                        type:"post",
+                        data:{ids:ids},
+                        success:function(){
+                            bootbox.alert({
+                                size: "small",
+                                title: "提示",
+                                message: "删除成功！",
+                                buttons: {
+                                    ok: {
+                                        label: '确定',
+                                        className: 'btn-success'
+                                    }
+                                },
+                                callback: function(){}
+                            })
+                            searchUser();//刷新表格
+                        }
+                    })
+                }
+            }
+        })
+    }
+
     //打开添加页面
     function openAdd(){
         bootbox.dialog({
             title:'添加用户信息',
-            message: createAddContent("<%=request.getContextPath() %>/toAdd"),
+            message: createAddContent("<%=request.getContextPath() %>/toUserAdd"),
             closeButton: true,
             buttons : {
                 "success" : {
@@ -119,7 +150,6 @@
                             type:'post',
                             data:$("#myForm").serialize(),
                             success:function(data){
-                                //$('#myTable').bootstrapTable('refresh');
                                 searchUser();
                             }
                         });
@@ -137,6 +167,7 @@
         });
     }
 
+    //条查刷新
     function searchUser(){
         $('#myTable').bootstrapTable('refresh');//刷新表格
     }
@@ -146,23 +177,16 @@
         $("#myTable").bootstrapTable({
             toolbar:"#toolbars",
             url:'<%=request.getContextPath() %>/user/queryUser',//获取数据地址
-            /*method: 'post',                      //请求方式（*）*/
             striped: true,                      //是否显示行间隔色
-            cache: true,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
             pagination: true,                   //是否显示分页（*）
-            /*sortable: true,                     //是否启用排序
-            sortOrder: "userId",                   //排序方式*/
-            pageNumber:1,                       //初始化加载第一页，默认第一页
-            pageSize: 10,                       //每页的记录行数（*）
-            pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
-            /*search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大*/
-            strictSearch: true,
-            showColumns: true,                  //是否显示所有的列
+            pageList:[5, 10, 20, 50],//分页组件
+            pageNumber:1,
+            pageSize:5,//默认每页条数
+            showColumns: false,                  //是否显示所有的列
             showRefresh: true,                  //是否显示刷新按钮
             minimumCountColumns: 2,             //最少允许的列数
             clickToSelect: true,                //是否启用点击选中行
             height: 400,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-            /*uniqueId: "ID",                     //每一行的唯一标识，一般为主键列*/
             showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
             detailView: false,                   //是否显示父子表
@@ -170,7 +194,7 @@
                 return {
                     page:this.pageNumber,
                     rows:this.pageSize,
-                    name:$("#username").val()
+                    userName:$("#userName").val()
                 };
             },
             sidePagination:'server',//分页方式：client客户端分页，server服务端分页
@@ -178,10 +202,21 @@
                 {field:"check",checkbox:true},
                 {field:"userId",title:"id"},
                 {field:"userName",title:"用户名称"},
-                {field:"userPwd",title:"用户密码"},
-                {field:"userSex",title:"用户性别"},
-                {field:"userBirthday",title:"企业董事"},
-                {field:"roleId",title:"企业创建时间"}
+                {field:"userSex",title:"用户性别",formatter:function(value,row,index){
+                        return value==null?'暂未设置':value==1?'男':'女';
+                    }},
+                {field:"userBirthday",title:"用户生日",formatter:function(value,row,index){
+                        return value==null?'暂未设置':value.substr(0,10);
+                    }},
+                {field:"text",title:"用户角色",formatter:function(value,row,index){
+                        return value==null?'暂未设置':value;
+                    }},
+                {field:"fullName",title:"用户所在地",formatter:function(value,row,index){
+                        return value==null?'暂未设置':value;
+                    }},
+                {field:"tools",title:"操作",formatter:function(value,row,index){
+                        return "<a href='javascript:openUpdate("+row.userId+")'>修改</a>";
+                }}
             ]
         })
 

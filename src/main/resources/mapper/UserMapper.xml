@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jk.">
+<mapper namespace="com.jk.mapper.UserMapper">
+    <select id="queryUserTotal" parameterType="com.jk.bean.UserBean" resultType="long">
+        select count(*) from t_user u <include refid="queryPage"></include>
+    </select>
 
+    <select id="queryUser" parameterType="com.jk.bean.UserBean" resultType="com.jk.bean.UserBean">
+        select u.*,date_format(a.createDate,'%Y-%m-%d') createDate,a.modifyDate modifyDate,a.sort sort
+            ,a.fullName fullName,a.name name,r.text text,r.info info
+            from t_user u LEFT JOIN kf_area a
+            on a.id = u.areapid JOIN t_role r
+            on u.roleid = r.id
+            <include refid="queryPage"></include>
+            limit #{start},#{rows}
+
+    </select>
+    <sql id="queryPage">
+        where 1=1
+        <if test="userBean.userName!=null and userBean.userName!=''">
+            and  u.username like '%${userBean.userName}%'
+        </if>
+    </sql>
 </mapper>

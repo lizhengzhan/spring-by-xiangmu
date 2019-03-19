@@ -42,6 +42,7 @@
             pageList:[5, 10, 20, 50],//分页组件
             pageNumber:1,
             pageSize:5,//默认每页条数
+            height: 400,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
             queryParams:function(){
                 return {
                     page:this.pageNumber,

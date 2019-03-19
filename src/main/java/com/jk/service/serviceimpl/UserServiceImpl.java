@@ -28,4 +28,10 @@ public class UserServiceImpl implements UserServiec {
         hashMap.put("rows", list);
         return hashMap;
     }
+
+    @Override
+    public void delUserAll(String ids) {
+        String[] idList = ids.split(",");
+        userMapper.delUserAll(idList);
+    }
 }

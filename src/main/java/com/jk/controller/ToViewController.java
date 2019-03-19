@@ -16,8 +16,6 @@ public class ToViewController {
         return  "main";
     }
 
-
-
     @RequestMapping("tree")
     public   String  tree(){
         return  "tree";
@@ -27,6 +25,7 @@ public class ToViewController {
     public  String  toCompany() {
         return "company/list";
     }
+
     @RequestMapping("toCooperatives")
     public  String  toCooperatives(){
         return  "Cooperatives/show";
@@ -35,7 +34,6 @@ public class ToViewController {
     @RequestMapping("toAdd")
     public  String  toAdd(){
         return "company/addCompany";
-
     }
 
     @RequestMapping("toYiXiang")
@@ -48,4 +46,8 @@ public class ToViewController {
         return "user/list";
     }
 
+    @RequestMapping("toUserAdd")
+    public String toUserAdd(){
+        return "user/add";
+    }
 }
