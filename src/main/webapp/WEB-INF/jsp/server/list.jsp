@@ -64,12 +64,25 @@
                 {field:"adressId",title:"车辆所在地址"},
                 {field:"userId",title:"网站用户ID"},
                 {field:"authMen",title:"认证人"},
-                {field:"status",title:"退车状态"},
+                {field:"status",title:"退车状态",
+                    formatter: function(value,row,index){
+                       if(value==0){
+                           return "未分配";
+                       }
+                       if(value==1){
+
+                           return "已分配";
+                       }
+                       if(value==2){
+                           return "已处理";
+                       }
+                    }
+                },
                 {field:"makeMoney",title:"打款账号"},
                 {field:"getMoney",title:"收款人"},
                 {field:"123",title:"操作",
                     formatter: function(value,row,index){
-                        return '<input type="button" value="修改" onclick="queryServerById('+row.id+')">';
+                        return '<input type="button" value="修改" onclick="queryServerById('+row.id+')">----<input type="button" value="分配认证员" onclick="allotAuth('+row.id+')" >';
                     }
                 }
 
@@ -187,34 +200,52 @@
 
 
     //删除
+    //删除用户
     function delUser(){
-        var arr = $('#myTable').datagrid('getChecked');
-        if(arr.length <= 0){
-            $.messager.alert('提示','请选择要删除的数据！','warning')
-            return;
-        }
-        $.messager.confirm('提示','你确定要删除这些数据吗？',function(r){
-            if(r){
-                var ids = '';
-                for (var i = 0; i < arr.length; i++) {
-                    ids += "," +arr[i].id;//arr[i].id这里的id是主键id
-
+        //bootbox.alert("Your message here…");
+        bootbox.confirm({
+            size: "small",
+            title:"提示",
+            message: "是否确认删除",
+            buttons: {
+                confirm: {
+                    label: '确定',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: '取消',
+                    className: 'btn-danger'
                 }
-                ids=ids.substring(1);
-                $.ajax({
-                    url:'<%=request.getContextPath() %>/server/delServerById',
-                    type:'post',
-                    data:{ids:ids},
-                    dataType:'json',
-                    success:function(data){
-                        if (data) {
-                            $.messager.alert('提示','删除成功','success')
-                            initCompanyTable();//重新走一遍查询也就是刷新页面
-                        }else{
-                            $.messager.alert('提示','删除失败','error')
-                        }
+            },
+            callback: function(result){
+                if(result){
+                    var arr = $('#myTable').bootstrapTable('getSelections'); //获取表选择的行
+                    var ids = "";
+                    for(var i=0;i<arr.length;i++){
+                        ids+=ids==""?arr[i].id:","+arr[i].id;
                     }
-                })
+                    alert(ids);
+                    $.ajax({
+                        url:"<%=request.getContextPath() %>/server/delServerById",
+                        type:"post",
+                        data:{ids:ids},
+                        success:function(){
+                            bootbox.alert({
+                                size: "small",
+                                title: "提示",
+                                message: "删除成功！",
+                                buttons: {
+                                    ok: {
+                                        label: '确定',
+                                        className: 'btn-success'
+                                    }
+                                },
+                                callback: function(){}
+                            })
+                            searchUser();//刷新表格
+                        }
+                    })
+                }
             }
         })
     }

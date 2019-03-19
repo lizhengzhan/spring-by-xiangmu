@@ -21,6 +21,6 @@ public interface ServerMapper {
     @Update("update t_server set adress_id = #{adressId},auth_men = #{authMen},get_money = #{getMoney},make_money = #{makeMoney},order_id = #{orderId},status = #{status},user_id = #{userId} where id = #{id}")
     void updateServer(ServerBean serverBean);
 
-    @Delete("delete t_server where id = #{parseInt}")
+    @Delete("delete from t_server where id = #{parseInt}")
     void delServerById(int parseInt);
 }
