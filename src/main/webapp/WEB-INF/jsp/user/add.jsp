@@ -83,16 +83,18 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <label for="createTime">生日:</label>
+                <label for="userBirthday">生日:</label>
             </div>
             <div class="col-md-4">
-                <input type="text" id="createTime" class="form-control floating-label" name="createTime" placeholder="Start Date">
+                <input type="text" id="userBirthday" class="form-control floating-label" name="userBirthday" placeholder="Start Date">
             </div>
             <div class="col-md-2">
-                <label>角色:</label>
+                <label for="roleId">角色:</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="keFuId" id="keFuId">
+                <select name="roleId" id="roleId" class="form-control" >
+                    <option value="">--请选择--</option>
+                </select>
             </div>
         </div>
 
