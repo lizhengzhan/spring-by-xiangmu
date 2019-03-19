@@ -31,6 +31,11 @@ public class UserBean {
     @Column(name = "roleid")
     private Integer roleId;
 
+    @Column(name = "areapid")
+    private Integer areapid;
+
+    @Column(name = "email")
+    private String email;
 
     //业务字段
 
