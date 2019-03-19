@@ -70,4 +70,13 @@ public class ToViewController {
     public String toBrandAdd(){
         return "brand/brandAdd";
     }
+
+
+    //跳转汽车审核页面
+    @RequestMapping("toCarAuditLits")
+    public   String  toCarAuditLits(){
+        return   "carAudit/list";
+    }
+
+
 }

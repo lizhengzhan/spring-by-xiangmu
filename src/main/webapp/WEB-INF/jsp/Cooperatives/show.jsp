@@ -54,7 +54,7 @@
     }
 
     function searchUser(){
-        $('#myTable').bootstrapTable('refresh')
+        $('#myTable').bootstrapTable('refresh');
     }
 
     $(function () {
@@ -69,6 +69,8 @@
             pageList:[5, 10, 20, 50],//分页组件
             pageNumber:1,
             pageSize:5,//默认每页条数
+            height: 650,
+            showRefresh: true,
             queryParams:function(){
                 return {
                     page:this.pageNumber,
@@ -82,18 +84,17 @@
                 {field:"id",title:"id"},
                 {field:"phone",title:"手机"},
                 {field:"email",title:"邮箱"},
-                {field:"site",title:"地址"},
+                {field:"fullName",title:"地址"},
                 {field:"capital",title:"注册资金"},
-                {field:"creditUnionCode",title:"统一社用社代码"},
+                {field:"credit",title:"统一社用社代码"},
                 {field:"registration",title:"纳税人识别号"},
                 {field:"registrationNumber",title:"注册号"},
-                {field:"organizationCode",title:"组织机构代码"},
+                {field:"organ",title:"组织机构代码"},
                 {field:"companyType",title:"公司类型"},
                 {field:"info",title:"简介"}
             ]
         })
     }
-
 
     //打开添加页面
     function addCooper(){

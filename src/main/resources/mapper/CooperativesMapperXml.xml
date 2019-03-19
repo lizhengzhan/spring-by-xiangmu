@@ -2,25 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jk.mapper.CooperativesMapper">
 <select id="queryCooperatives" resultType="com.jk.bean.CooperativesBean">
-SELECT
-	c.id AS id,
-	c.capital AS capital,
-	c.company_type AS companyType,
-	c.credit_union_code AS creditUnionCode,
-	c.email AS email,
-	c.info AS info,
-	c.officer_net AS officerNet,
-	c.organization_code AS organizationCode,
-	c.phone AS phone,
-	c.registration AS registration,
-	c.registration_number AS registrationNumber,
-	c.site AS site,
-	c.STATUS AS STATUS
-FROM
-	t_cooperatives c
-GROUP BY
-	c.id
-	LIMIT #{start},#{rows}
+	SELECT kf.fullname,c.id AS id,c.capital AS capital,c.company_type AS companyType,c.credit AS credit,c.email AS email,c.info AS info,c.officer_net AS officerNet,c.organ AS organ,c.phone AS phone,c.registration AS registration,
+		   c.registration_number AS registrationNumber,c.site AS site,c.STATUS AS STATUS
+	FROM  t_cooperatives c  left  join kf_area kf on c.city=kf.id GROUP BY c.id LIMIT #{start},#{rows}
 </select>
 
     <!--查询条数-->
@@ -28,8 +12,11 @@ GROUP BY
         select  count(*)  from  t_cooperatives
     </select>
 
+	<!--新增-->
 	<insert id="addCooperativen" parameterType="com.jk.bean.CooperativesBean">
-		insert into t_cooperatives (capital,company_type,credit_union_code,email,info,officer_net,organization_code,phone,registration,registration_number,site)
-		values (#{capital},#{companyType},#{creditUnionCode},#{email},#{info},#{officerNet},#{organizationCode},#{phone},#{registration},#{registrationNumber},#{site})
+		insert into t_cooperatives (capital,company_type,credit,email,info,officer_net,organ,phone,registration,registration_number,site,province,city)
+		values (#{capital},#{companyType},#{credit},#{email},#{info},#{officerNet},#{organ},#{phone},#{registration},#{registrationNumber},#{site},#{province},#{city})
 	</insert>
+
+
 </mapper>
