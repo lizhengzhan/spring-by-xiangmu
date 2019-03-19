@@ -38,6 +38,22 @@ public class ToViewController {
 
     }
 
+    @RequestMapping("toService")
+    public String toService(){
+        return "server/list";
+    }
+
+    @RequestMapping("toServerAdd")
+    public String toServerAdd(){
+        System.out.println("12312312312");
+        return "server/adduser";
+    }
+
+    @RequestMapping("toUpdate")
+    public String toUpdate(){
+        return "server/updateuser";
+    }
+
     @RequestMapping("toYiXiang")
     public  String  toYiXiang(){
         return  "jinrong/list";
