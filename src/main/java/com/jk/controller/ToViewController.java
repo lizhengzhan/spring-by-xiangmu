@@ -43,13 +43,14 @@ public class ToViewController {
         return "server/list";
     }
 
-    @RequestMapping("toAdd")
-    public String toAdd(){
-        return "adduser";
+    @RequestMapping("toServerAdd")
+    public String toServerAdd(){
+        System.out.println("12312312312");
+        return "server/adduser";
     }
 
     @RequestMapping("toUpdate")
     public String toUpdate(){
-        return "updateuser";
+        return "server/updateuser";
     }
 }

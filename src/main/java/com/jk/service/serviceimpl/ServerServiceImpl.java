@@ -32,4 +32,24 @@ public class ServerServiceImpl implements ServerService {
         hashMap.put("rows", list);
         return hashMap;
     }
+
+    @Override
+    public void addServer(ServerBean serverBean) {
+        if(serverBean.getId()==null){
+            System.out.println(serverBean.getId());
+        mapper.addServer(serverBean);
+        }else {
+            mapper.updateServer(serverBean);
+        }
+    }
+
+    @Override
+    public ServerBean queryServerById(Integer id) {
+        return mapper.queryServerById(id);
+    }
+
+    @Override
+    public void delServerById(int parseInt) {
+        mapper.delServerById(parseInt);
+    }
 }

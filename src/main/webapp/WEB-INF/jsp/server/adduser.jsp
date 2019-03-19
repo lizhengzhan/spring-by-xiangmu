@@ -15,41 +15,41 @@
 	<div style="width:550px">
 		<form id="myForm">
 		  <div class="row">
-		  <div class="col-md-2">
+		  <div class="col-md-4">
 			    <label for="orderId">订单id:</label>
 		  	</div>
-		  	<div class="col-md-4">
-			    <input type="text" class="form-control" name="text" id="name">		  	
-		  	</div>
-			  <div class="col-md-2">
+		  	<div class="col-md-8">
+			    <input type="text" class="form-control" name="orderId" id="orderId">
+		  	</div><br>
+			  <div class="col-md-4">
 				  <label for="adressId">车辆所在地址:</label>
 			  </div>
+			  <div class="col-md-8">
+				  <input type="text" class="form-control" name="adressId" id="adressId">
+			  </div><br>
 			  <div class="col-md-4">
-				  <input type="text" class="form-control" name="text" id="name">
-			  </div>
-			  <div class="col-md-2">
 				  <label for="userId">网站用户ID:</label>
 			  </div>
+			  <div class="col-md-8">
+				  <input type="text" class="form-control" name="userId" id="userId">
+			  </div><br>
 			  <div class="col-md-4">
-				  <input type="text" class="form-control" name="text" id="name">
-			  </div>
-			  <div class="col-md-2">
 				  <label for="authMen">认证人:</label>
 			  </div>
+			  <div class="col-md-8">
+				  <input type="text" class="form-control" name="authMen" id="authMen">
+			  </div><br>
 			  <div class="col-md-4">
-				  <input type="text" class="form-control" name="text" id="name">
-			  </div>
-			  <div class="col-md-2">
 				  <label for="makeMoney">打款账号:</label>
 			  </div>
+			  <div class="col-md-8">
+				  <input type="text" class="form-control" name="makeMoney" id="makeMoney">
+			  </div><br>
 			  <div class="col-md-4">
-				  <input type="text" class="form-control" name="text" id="name">
-			  </div>
-			  <div class="col-md-2">
 				  <label for="getMoney">收款人:</label>
 			  </div>
-			  <div class="col-md-4">
-				  <input type="text" class="form-control" name="text" id="name">
+			  <div class="col-md-8">
+				  <input type="text" class="form-control" name="getMoney" id="getMoney">
 			  </div>
 		  </div>		  
 		</form>
