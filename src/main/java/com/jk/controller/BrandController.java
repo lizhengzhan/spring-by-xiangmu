@@ -3,6 +3,7 @@ package com.jk.controller;
 import com.jk.bean.BrandBean;
 import com.jk.bean.CarsBean;
 import com.jk.service.BrandService;
+import com.jk.service.CarsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,12 @@ public class BrandController {
     @Autowired
     private BrandService brandService;
 
+    @Autowired
+    private CarsService carsService;
+
+    public List<CarsBean> carsList(){
+        return carsService.carsList();
+    }
 
     /**
      * 分页查询
