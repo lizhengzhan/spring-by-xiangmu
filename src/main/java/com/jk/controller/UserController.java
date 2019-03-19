@@ -21,4 +21,10 @@ public class UserController {
     public HashMap<String, Object> queryUser(Integer page, Integer rows, UserBean userBean){
         return userServiec.queryUser(page,rows,userBean);
     }
+
+    @RequestMapping("delUserAll")
+    @ResponseBody
+    public void delUserAll(String ids){
+        userServiec.delUserAll(ids);
+    }
 }

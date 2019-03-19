@@ -56,7 +56,7 @@
         var pwd = $("#pwd").val();
         $.ajax({
             url:"<%=request.getContextPath()%>/loginUser",
-            data:{"userName":loginnumber,"userPwd":pwd},
+            data:{"userName":loginnumber,"password":pwd},
             success:function(data){
                 swal(data, "", "error")
                 if(data == "登陆成功！"){

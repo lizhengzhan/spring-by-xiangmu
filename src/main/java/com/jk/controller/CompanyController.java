@@ -26,10 +26,37 @@ public class CompanyController {
     @RequestMapping("addCompany")
     @ResponseBody
     public  void addCompany(CompanyBean companyBean) {
-        System.out.println("com");
         companyService.addCompany(companyBean);
 
     }
+
+    @RequestMapping("queryCompanyById")
+    @ResponseBody
+    public CompanyBean  queryCompanyById(Integer  id){
+
+        return  companyService.queryCompanyById(id);
+    }
+
+    //批量删除
+    @RequestMapping("deleteAll")
+    @ResponseBody
+    public void deleteAll(String[] ids){
+        companyService.deleteAll(ids);
+    }
+
+    //联系
+    @ResponseBody
+    @RequestMapping("relation")
+   public  void relation(Integer  id){
+        companyService.relation(id);
+   }
+
+   //等待联系
+   @ResponseBody
+   @RequestMapping("await")
+   public   void await(Integer  id){
+        companyService.await(id);
+   }
 
 
 }
