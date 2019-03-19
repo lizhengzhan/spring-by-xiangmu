@@ -43,10 +43,19 @@ public class ToViewController {
         return  "jinrong/list";
     }
 
-    
+
     @RequestMapping("toAddCooper")
     public   String  toAddCooper(){
         return  "Cooperatives/addCooper";
     }
 
+    @RequestMapping("toUser")
+    public  String  toUser() {
+        return "user/list";
+    }
+
+    @RequestMapping("toUserAdd")
+    public String toUserAdd(){
+        return "user/add";
+    }
 }
