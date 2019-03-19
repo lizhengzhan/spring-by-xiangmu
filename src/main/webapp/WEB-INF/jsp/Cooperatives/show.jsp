@@ -30,9 +30,33 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/js/bootstrap-fileinput/css/fileinput.css">
 </head>
 <body>
+<div id="toolbar">
+    <form class="form-inline">
+        <button onclick="addCooper()" type="button" class="btn btn-success glyphicon glyphicon-plus">新增</button>
+    </form>
+</div>
+
+
 <table class="tabls" id="cooperTable"></table>
 </body>
 <script>
+
+    var res;
+    function createAddContent(url){
+        $.ajax({
+            url:url,
+            async:false,
+            success:function(data){
+                res = data;
+            }
+        });
+        return res;
+    }
+
+    function searchUser(){
+        $('#myTable').bootstrapTable('refresh')
+    }
+
     $(function () {
         initCooperivateTable();
     })
@@ -69,5 +93,41 @@
             ]
         })
     }
+
+
+    //打开添加页面
+    function addCooper(){
+        bootbox.dialog({
+            title:'添加企业信息',
+            message: createAddContent("<%=request.getContextPath() %>/toAddCooper"),
+            closeButton: true,
+            buttons : {
+                "success" : {
+                    "label" : "<i class='glyphicon glyphicon-ok'></i> 保存",
+                    "className" : "btn-sm btn-success",
+                    "callback" : function() {
+                        $.ajax({
+                            url:'<%=request.getContextPath() %>/addCooperativen',
+                            type:'post',
+                            data:$("#cooperForm").serialize(),
+                            success:function(data){
+                                //$('#myTable').bootstrapTable('refresh');
+                                searchUser();
+                            }
+                        });
+                    }
+                },
+                "cancel" : {
+                    "label" : "<i class='glyphicon glyphicon-remove'></i> 取消",
+                    "className" : "btn-sm btn-danger",
+                    "callback" : function() {
+
+                    }
+                }
+            }
+
+        });
+    }
+
 </script>
 </html>
