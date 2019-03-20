@@ -71,7 +71,7 @@
     }
 
     function searchUser(){
-        $('#myTable').bootstrapTable('refresh')
+        $('#myTable').bootstrapTable('refresh');
     }
 
 

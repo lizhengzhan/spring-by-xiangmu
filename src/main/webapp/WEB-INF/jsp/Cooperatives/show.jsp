@@ -37,7 +37,7 @@
 </div>
 
 
-<table class="tabls" id="cooperTable"></table>
+<table class="table" id="cooperTable"></table>
 </body>
 <script>
 
@@ -54,7 +54,7 @@
     }
 
     function searchUser(){
-        $('#myTable').bootstrapTable('refresh');
+        $('#cooperTable').bootstrapTable('refresh');
     }
 
     $(function () {
@@ -91,9 +91,46 @@
                 {field:"registrationNumber",title:"注册号"},
                 {field:"organ",title:"组织机构代码"},
                 {field:"companyType",title:"公司类型"},
-                {field:"info",title:"简介"}
+                {field:"info",title:"简介"},
+                {field:"status",title:"审核",formatter:function(value,row,index){
+                        if (value==0) {
+                            return  "需要得到审核";
+                        }else {
+                            return  "";
+                        }
+                    }},
+                {field:"toolls",title:"",formatter:function(value,row,index){
+                    if (row.status==0){
+                        return "<button type=\"button\" class=\"btn btn-default\" onclick='checks("+row.id+")'>审核</button>\n";
+                    }
+                    }}
             ]
         })
+    }
+
+    //审核
+    function checks(id) {
+        $.ajax({
+            url:"<%=request.getContextPath() %>/checks",
+            type:"post",
+            data:{id:id},
+            success:function(){
+                bootbox.alert({
+                    size: "small",
+                    title: "提示",
+                    message: "审核成功！",
+                    buttons: {
+                        ok: {
+                            label: '确定',
+                            className: 'btn-success'
+                        }
+                    },
+                    callback: function(){}
+                });
+                searchUser();//刷新表格
+            }
+        })
+
     }
 
     //打开添加页面
