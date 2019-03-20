@@ -22,4 +22,9 @@ public class CooperativesController {
         return  cooperativesService.queryCooperatives(page,rows,cooperativesBean);
     }
 
+    @ResponseBody
+    @RequestMapping("addCooperativen")
+    public  void     addCooperativen(CooperativesBean cooperativesBean){
+        cooperativesService.addCooperativen(cooperativesBean);
+    }
 }

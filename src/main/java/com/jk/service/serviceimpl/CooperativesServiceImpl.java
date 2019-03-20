@@ -31,6 +31,10 @@ public class CooperativesServiceImpl  implements   CooperativesService{
         return hashMap;
     }
 
+    @Override
+    public void addCooperativen(CooperativesBean cooperativesBean) {
+        cooperativesMapper.addCooperativen(cooperativesBean);
+    }
 
 
 }

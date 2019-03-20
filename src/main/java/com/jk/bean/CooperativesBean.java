@@ -25,18 +25,46 @@ public class CooperativesBean {
     @Column(name = "capital")
     private  String    capital;//注册资金
     @Column(name = "creditUnionCode")
-    private   String  creditUnionCode;//统一社用社代码
+    private   String  credit;//统一社用社代码
     @Column(name = "registration")
     private   String   registration;//纳税人识别号
     @Column(name = "registrationNumber")
     private   String   registrationNumber;//注册号
-    @Column(name = "organizationCode")
-    private     String   organizationCode;//组织机构代码
+    @Column(name = "organ")
+    private     String   organ;//组织机构代码
     @Column(name = "companyType")
     private     String   companyType;  //公司类型
     @Column(name = "status")
     private   Integer   status;//   1/0
 
+    @Column(name = "province")
+     private   String  province;
+    @Column(name = "city")
+     private   String  city;
+
+    @Transient
+    private   String  fullName;
+    @Transient
+    private   String  name;
+
+    public CooperativesBean(String phone, String email, String officerNet, String site, String info, String capital, String credit, String registration, String registrationNumber, String organ, String companyType, Integer status, String province, String city, String fullName, String name) {
+        this.phone = phone;
+        this.email = email;
+        this.officerNet = officerNet;
+        this.site = site;
+        this.info = info;
+        this.capital = capital;
+        this.credit = credit;
+        this.registration = registration;
+        this.registrationNumber = registrationNumber;
+        this.organ = organ;
+        this.companyType = companyType;
+        this.status = status;
+        this.province = province;
+        this.city = city;
+        this.fullName = fullName;
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;
@@ -94,12 +122,12 @@ public class CooperativesBean {
         this.capital = capital;
     }
 
-    public String getCreditUnionCode() {
-        return creditUnionCode;
+    public String getCredit() {
+        return credit;
     }
 
-    public void setCreditUnionCode(String creditUnionCode) {
-        creditUnionCode = creditUnionCode;
+    public void setCredit(String credit) {
+        this.credit = credit;
     }
 
     public String getRegistration() {
@@ -118,12 +146,12 @@ public class CooperativesBean {
         this.registrationNumber = registrationNumber;
     }
 
-    public String getOrganizationCode() {
-        return organizationCode;
+    public String getOrgan() {
+        return organ;
     }
 
-    public void setOrganizationCode(String organizationCode) {
-        organizationCode = organizationCode;
+    public void setOrgan(String organ) {
+        this.organ = organ;
     }
 
     public String getCompanyType() {
@@ -142,20 +170,36 @@ public class CooperativesBean {
         this.status = status;
     }
 
-    public CooperativesBean(Integer id, String phone, String email, String officerNet, String site, String info, String capital, String creditUnionCode, String registration, String registrationNumber, String organizationCode, String companyType, Integer status) {
-        this.id = id;
-        this.phone = phone;
-        this.email = email;
-        this.officerNet = officerNet;
-        this.site = site;
-        this.info = info;
-        this.capital = capital;
-        creditUnionCode = creditUnionCode;
-        this.registration = registration;
-        this.registrationNumber = registrationNumber;
-        organizationCode = organizationCode;
-        this.companyType = companyType;
-        this.status = status;
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public CooperativesBean() {
@@ -171,15 +215,16 @@ public class CooperativesBean {
                 ", site='" + site + '\'' +
                 ", info='" + info + '\'' +
                 ", capital='" + capital + '\'' +
-                ", CreditUnionCode='" + creditUnionCode + '\'' +
+                ", credit='" + credit + '\'' +
                 ", registration='" + registration + '\'' +
                 ", registrationNumber='" + registrationNumber + '\'' +
-                ", OrganizationCode='" + organizationCode + '\'' +
+                ", organ='" + organ + '\'' +
                 ", companyType='" + companyType + '\'' +
                 ", status=" + status +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
-
-
-
 }

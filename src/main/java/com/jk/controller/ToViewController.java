@@ -16,6 +16,8 @@ public class ToViewController {
         return  "main";
     }
 
+
+
     @RequestMapping("tree")
     public   String  tree(){
         return  "tree";
@@ -25,7 +27,6 @@ public class ToViewController {
     public  String  toCompany() {
         return "company/list";
     }
-
     @RequestMapping("toCooperatives")
     public  String  toCooperatives(){
         return  "Cooperatives/show";
@@ -34,11 +35,34 @@ public class ToViewController {
     @RequestMapping("toAdd")
     public  String  toAdd(){
         return "company/addCompany";
+
+    }
+
+    @RequestMapping("toService")
+    public String toService(){
+        return "server/list";
+    }
+
+    @RequestMapping("toServerAdd")
+    public String toServerAdd(){
+        System.out.println("12312312312");
+        return "server/adduser";
+    }
+
+    @RequestMapping("toUpdate")
+    public String toUpdate(){
+        return "server/updateuser";
     }
 
     @RequestMapping("toYiXiang")
     public  String  toYiXiang(){
         return  "jinrong/list";
+    }
+
+
+    @RequestMapping("toAddCooper")
+    public   String  toAddCooper(){
+        return  "Cooperatives/addCooper";
     }
 
     @RequestMapping("toUser")
@@ -62,4 +86,13 @@ public class ToViewController {
     public String toBrandAdd(){
         return "brand/brandAdd";
     }
+
+
+    //跳转汽车审核页面
+    @RequestMapping("toCarAuditLits")
+    public   String  toCarAuditLits(){
+        return   "carAudit/list";
+    }
+
+
 }

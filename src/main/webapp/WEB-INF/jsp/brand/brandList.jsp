@@ -206,10 +206,53 @@
                 {field:"oldName",title:"车龄"},
                 {field:"modelsName",title:"车型"},
                 {field:"mileageName",title:"里程"},
-                {field:"displaceName",title:"排量"}
+                {field:"displaceName",title:"排量"},
+                {field:"status",title:"状态",formatter:function(value,row,index){
+                        if (value==0) {
+                            return  "需要得到认证";
+                        } else {
+                            return  "";
+                        }
+                    }},
+                {field:"tools",title:"",formatter:function(value,row,index){
+                        if (row.status==0) {
+                            return  "<button type=\"button\" class=\"btn btn-default\" onclick='authentication("+row.id+")'>认证</button>\n";
+                        } else {
+                            return  "";
+                        }
+                    }}
             ]
         })
     }
+
+
+    //删除用户
+        function authentication(id){
+            $.ajax({
+             url : "<%=request.getContextPath()%>/authentication",
+                async : true,
+                type: "POST",
+                data: {"id":id},
+                dataType: "json",
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                success : function(data) {
+                    if(data == 1){
+                        debugger;
+                        alert("认证成功！");
+                        window.location.reload();
+                    }else{
+                        alert("认证失败！");
+                    }
+                },
+                error : function(e){
+                    alert("代码有问题，请打开F12和debug进行调试！");
+                }
+            });
+        }
+
+
+
+
 
 </SCRIPT>
 </html>
