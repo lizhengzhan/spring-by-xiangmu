@@ -8,12 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.List;
 
 
-@Controller
+@RestController
 public class BrandController {
 
     @Autowired
@@ -22,6 +23,8 @@ public class BrandController {
     @Autowired
     private CarsService carsService;
 
+    @RequestMapping("carsList")
+    @ResponseBody
     public List<CarsBean> carsList(){
         return carsService.carsList();
     }
@@ -50,12 +53,13 @@ public class BrandController {
     }
 
     /**
-     * 删除
-     * @param id
+     * 批删+单删
+     * @param ids
+     * @return
      */
     @RequestMapping("deleteBrand")
     @ResponseBody
-    public void deleteBrand(Integer id){
-        brandService.deleteBrand(id);
+    public void deleteBrand(String[] ids){
+        brandService.deleteBrand(ids);
     }
 }

@@ -30,16 +30,27 @@
         <if test="brandBean.brandName!=null and brandBean.brandName!=''">
             and  b.brand_name like '%${brandBean.brandName}%'
         </if>
+        <if test="brandBean.carsId!=null and brandBean.carsId!=''">
+            and  b.cars_id like '%${brandBean.carsId}%'
+        </if>
     </sql>
-
-    <!--删除-->
-    <delete id="deleteBrand" parameterType="int">
-        delete from t_brand where id=#{id}
-    </delete>
 
     <!--新增-->
     <insert id="addBrand" parameterType="com.jk.bean.BrandBean" useGeneratedKeys="true" keyProperty="id">
-        insert into t_brand(brandName,carsId,oldId,modelsId,mileageId,displaceId)
+        insert into t_brand (brand_name,cars_id,old_id,models_id,mileage_id,displace_id)
             values(#{brandName},#{carsId},#{oldId},#{modelsId},#{mileageId},#{displaceId})
     </insert>
+
+
+    <!-- 批删+单删 -->
+    <delete id="deleteBrand" parameterType="string">
+        delete from  t_brand where id i n
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
+
+
+
+
