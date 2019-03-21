@@ -3,6 +3,7 @@ package com.jk.service.serviceimpl;
 import com.jk.bean.UserBean;
 import com.jk.mapper.UserMapper;
 import com.jk.service.UserServiec;
+import com.jk.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +34,28 @@ public class UserServiceImpl implements UserServiec {
     public void delUserAll(String ids) {
         String[] idList = ids.split(",");
         userMapper.delUserAll(idList);
+    }
+
+    @Override
+    public void addUserAdd(UserBean userBean) {
+        if(userBean.getUserId()!=null){
+            //修改用户信息
+            userMapper.updateUserById(userBean);
+        }else{
+            userBean.setPassword(MD5Util.getMD5(userBean.getPassword()));
+            userMapper.addUserAdd(userBean);
+        }
+
+    }
+
+    @Override
+    public UserBean queryUserById(Integer id) {
+        return userMapper.queryUserById(id);
+    }
+
+    @Override
+    public void updateUserPassword(UserBean userBean) {
+        userBean.setPassword(MD5Util.getMD5(userBean.getPassword()));
+        userMapper.updateUserPassword(userBean);
     }
 }

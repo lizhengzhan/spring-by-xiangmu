@@ -30,9 +30,24 @@
         <if test="brandBean.brandName!=null and brandBean.brandName!=''">
             and  b.brand_name like '%${brandBean.brandName}%'
         </if>
+        <if test="brandBean.carsId!=null ">
+            and  b.cars_id like '%${brandBean.carsId}%'
+        </if>
+        <if test="brandBean.oldId!=null ">
+            and  b.old_id like '%${brandBean.oldId}%'
+        </if>
+        <if test="brandBean.modelsId!=null and brandBean.models Id!=''">
+            and  b.models_id like '%${brandBean.modelsId}%'
+        </if>
+        <if test="brandBean.mileageId!=null and brandBean.mileageId!=''">
+            and  b.mileage_id like '%${brandBean.mileageId}%'
+        </if>
+        <if test="brandBean.displaceId!=null">
+            and  b.displace_id like '%${brandBean.displaceId}%'
+        </if>
     </sql>
 
-    <!--删除-->
+    <!--批删+单删-->
     <delete id="deleteBrand" parameterType="int">
         delete from t_brand where id=#{id}
     </delete>

@@ -45,10 +45,11 @@ public interface BrandMapper {
      */
     void addBrand(BrandBean brand);
 
+
+
     /**
-     * 删除`
-     * @param id
+     * 批删+单删
+     * @param ids
      */
-    /*@Select("delete from t_brand where id=#{id}")*/
-    void deleteBrand(Integer id);
+    void deleteBrand(String[] ids);
 }

@@ -35,7 +35,27 @@
         <form class="form-inline">
             <div class="form-group">
                 <label for="brandName">品牌</label>
-                <input type="text" class="form-control" id="brandName" placeholder="请输入品牌名称">
+                <input type="text" class="form-control" id="brandName" placeholder="请输入品牌">
+            </div>
+            <div class="form-group">
+                <label for="carsId">车系</label>
+                <input type="text" class="form-control" id="carsId" placeholder="请输入车系">
+            </div>
+            <div class="form-group">
+                <label for="oldId">车龄</label>
+                <input type="text" class="form-control" id="oldId" placeholder="请输入车龄">
+            </div>
+            <div class="form-group">
+                <label for="modelsId">车型</label>
+                <input type="text" class="form-control" id="modelsId" placeholder="请输入车型">
+            </div>
+            <div class="form-group">
+                <label for="mileageId">里程</label>
+                <input type="text" class="form-control" id="mileageId" placeholder="请输入里程">
+            </div>
+            <div class="form-group">
+                <label for="displaceId">排量</label>
+                <input type="text" class="form-control" id="displaceId" placeholder="请输入排量">
             </div>
             <button onclick="searchBrand()" type="button" class="btn btn-info glyphicon glyphicon-search">搜索</button>
             <button onclick="openAdd()" type="button" class="btn btn-info glyphicon glyphicon-plus">发布</button>
@@ -51,6 +71,33 @@
         initBrandTable();
     })
 
+
+
+    $("#cars").change(function () {
+        if ($(this).val() == "") return;
+        $("#cars option").remove();
+        var code = $(this).find("option:selected").val();
+        var html = "<option value=''>--请选择--</option>";
+        $.ajax({
+            url:"<%=request.getContextPath() %>/carsList",
+            type:"post",
+            success:function(data){
+                $.each(data, function (idx, item) {
+                    html += "<option value=" + item.id + " >" + item.carsName + "</option>";
+                });
+            }
+        });
+    });
+    //初始课程类型
+ /*   function initBrandTable(){
+        $("#cars").dropdown({
+            url:"<%=request.getContextPath() %>/carsList",
+            valueField:"id",
+            textField:"carsName"
+            /!* multiple:true*!/
+        })
+    }*/
+
     var res;
     function createAddContent(url){
         $.ajax({
@@ -63,7 +110,7 @@
         return res;
     }
 
-    //打开添加页面
+    //打开发布页面
     function openAdd(){
         bootbox.dialog({
             title:'发布买车信息',
@@ -122,7 +169,7 @@
                     $.ajax({
                         url:"<%=request.getContextPath() %>/deleteBrand",
                         type:"post",
-                        data:{id:ids},
+                        data:{ids:ids},
                         success:function(){
                             bootbox.alert({
                                 size: "small",
@@ -162,7 +209,11 @@
                 return {
                     page:this.pageNumber,
                     rows:this.pageSize,
-                    brandName:$("#brandName").val()
+                    brandName:$("#brandName").val(),
+                    carsId:$("#carsId").val(),
+                    oldId:$("#oldId").val(),
+                    modelsId:$("#modelsId").val(),
+                    mileageId:$("#mileageId").val()
                 };
             },
             sidePagination:'server',//分页方式：client客户端分页，server服务端分页
@@ -174,10 +225,54 @@
                 {field:"oldName",title:"车龄"},
                 {field:"modelsName",title:"车型"},
                 {field:"mileageName",title:"里程"},
-                {field:"displaceName",title:"排量"}
+                {field:"displaceName",title:"排量"},
+                {field:"status",title:"状态",formatter:function(value,row,index){
+                        if (value==0) {
+                            return  "需要得到认证";
+                        } else {
+                            return  "";
+                        }
+                    }},
+                {field:"tools",title:"",formatter:function(value,row,index){
+                        if (row.status==0) {
+                            return  "<button type=\"button\" class=\"btn btn-default\" onclick='authentication("+row.id+")'>认证</button>\n";
+                        } else {
+                            return  "";
+                        }
+                    }}
             ]
         })
     }
 
+
+  //刷新页面
+    function searchUser(){
+        $('#myTable').bootstrapTable('refresh');
+    }
+
+
+    //取消订单
+    function  authentication(id){
+        $.ajax({
+            url:"<%=request.getContextPath() %>/authentication",
+            type:"post",
+            data:{id:id},
+            success:function(){
+                bootbox.alert({
+                    size: "small",
+                    title: "提示",
+                    message: "认证成功！",
+                    buttons: {
+                        ok: {
+                            label: '确定',
+                            className: 'btn-success'
+                        }
+                    },
+                    callback: function(){}
+                })
+                searchUser();//刷新表格
+            }
+        })
+    }
 </SCRIPT>
 </html>

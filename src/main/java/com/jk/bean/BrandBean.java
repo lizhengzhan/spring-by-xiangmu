@@ -29,6 +29,9 @@ public class BrandBean {
     //排量表
     private Integer displaceId;
 
+    private  Integer  status;
+
+
     //业务字段
     @Transient
     private String carsName;
@@ -136,4 +139,16 @@ public class BrandBean {
     public String getDisplaceName() {
         return displaceName;
     }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+
+
+
 }

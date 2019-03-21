@@ -58,10 +58,10 @@
                     <div class="span6">
                         <%--统一社会信用社代码--%>
                         <div class="col-md-2">
-                            <label for="creditUnionCode">统一社会信用社代码:</label>
+                            <label for="credit">统一社会信用社代码:</label>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="creditUnionCode" id="creditUnionCode">
+                            <input type="text" class="form-control" name="credit" id="credit">
                         </div>
                     </div>
                     <div class="span6">
@@ -133,48 +133,77 @@
                     <div class="span6">
                         <%--组织机构代码--%>
                         <div class="col-md-2">
-                            <label for="organizationCode">组织机构代码:</label>
+                            <label for="organ">组织机构代码:</label>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="organizationCode" id="organizationCode">
+                            <input type="text" class="form-control" name="organ" id="organ">
                         </div>
                     </div>
                     <div class="span6">
-                        <%--企业地址--%>
+                        <%--企业简介--%>
                         <div class="row">
                             <div class="col-md-2">
-                                <label for="site">企业地址:</label>
+                                <label for="info">企业简介:</label>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" name="site" id="site">
+                                <input type="text" class="form-control" name="info" id="info">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        <%--企业地址--%>
+        <div class="col-md-2">
+            <label for="province">所在地:</label>
+        </div>
+        <div class="col-sm-3">
+            <select name="province" id="province" class="form-control" >
+                <option value="">--请选择--</option>
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <select name="city" id="city" class="form-control">
+                <option value=""></option>
+            </select>
+        </div>
 
     </form>
 </div>
 </body>
+
+<script>
+    $(function () {
+        var html = "";
+        $("#city").append(html);
+        /*$("#input_area").append(html);*/
+        $.ajax({
+            url:"<%=request.getContextPath() %>/area/queryArea?ids=0",
+            type:"post",
+            success:function(data){
+                $.each(data, function (idx, item) {
+                    html += "<option value=" + item.id + " >" + item.name + "</option>";
+                });
+                $("#province").append(html);
+            }
+        });
+    });
+
+    $("#province").change(function () {
+        if ($(this).val() == "") return;
+        $("#city option").remove();
+        var code = $(this).find("option:selected").val();
+        var html = "<option value=''>--请选择--</option>";
+        $.ajax({
+            url:"<%=request.getContextPath() %>/area/queryArea2?ids="+code,
+            type:"post",
+            success:function(data){
+                $.each(data, function (idx, item) {
+                    html += "<option value=" + item.id + " >" + item.name + "</option>";
+                });
+                $("#city").append(html);
+            }
+        });
+    });
+</script>
 </html>
-<%--
-<div class="col-md-2">
-                            <label for="organizationCode">企业类型:</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" name="organizationCode" id="organizationCode">
-                        </div>
-
-
-                        <div class="row">
-                          <div class="span12">
-                              Level 1 of column
-                                  <div class="row">
-                                        <div class="span6">Level 2</div>
-                                        <div class="span6">Level 2</div>
-                                   </div>
-                            </div>
-                           </div>
---%>

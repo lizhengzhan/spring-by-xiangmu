@@ -1,9 +1,7 @@
 package com.jk.mapper;
 
 import com.jk.bean.UserBean;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -23,4 +21,25 @@ public interface UserMapper {
             "</script>"
     })
     void delUserAll(@Param("idList")String[] idList);
+
+    @Insert("insert into t_user(username,loginnumber,password,usersex," +
+            "email,userbirthday,areapid,roleid) VALUES(" +
+            "#{userName},#{loginNumber},#{password}," +
+            "#{userSex},#{email},#{userBirthday}," +
+            "#{areapid},#{roleId})")
+    void addUserAdd(UserBean userBean);
+
+    @Select("select u.*,a.parentid grade from t_user u,kf_area a where u.areapid = a.id and u.userid = #{id}")
+    UserBean queryUserById(Integer id);
+
+    @Update("update t_user set username = #{userBean.userName}," +
+            "loginnumber = #{userBean.loginNumber}," +
+            "usersex = #{userBean.userSex},email = #{userBean.email}," +
+            "userbirthday = #{userBean.userBirthday}," +
+            "areapid = #{userBean.areapid},roleid = #{userBean.roleId} " +
+            "where userid = #{userBean.userId}")
+    void updateUserById(@Param("userBean") UserBean userBean);
+
+    @Update("update t_user set password = #{userBean.password} where userid = #{userBean.userId}")
+    void updateUserPassword(@Param("userBean") UserBean userBean);
 }

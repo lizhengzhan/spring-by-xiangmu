@@ -10,15 +10,13 @@ public class ToViewController {
 
     @RequestMapping("toLogin")
     public String toLogin(){
-        return "login";
+        return "../login.jsp";
     }
 
     @RequestMapping("toMain")
     public  String toMain(){
         return  "main";
     }
-
-
 
     @RequestMapping("tree")
     public   String  tree(){
@@ -29,6 +27,7 @@ public class ToViewController {
     public  String  toCompany() {
         return "company/list";
     }
+
     @RequestMapping("toCooperatives")
     public  String  toCooperatives(){
         return  "Cooperatives/show";
@@ -94,4 +93,44 @@ public class ToViewController {
         session.setAttribute("serverId",id);
         return "server/allotAuth";
     }
+
+    @RequestMapping("toQueryArea")
+    public String toQueryArea(){
+        return "area/area";
+    }
+
+    @RequestMapping("toAreaAdd")
+    public String toAreaAdd(){
+        return "area/add";
+    }
+
+    @RequestMapping("toUserUpdatePassword")
+    public String toUserUpdatePassword(){
+        return "user/upPassword";
+    }
+
+
+    //跳转汽车审核页面
+    @RequestMapping("toCarAuditLits")
+    public   String  toCarAuditLits(){
+        return   "carAudit/list";
+    }
+
+    //跳转企业审核
+    @RequestMapping("toFirmAudit")
+    public  String toFirmAudit(){
+        return  "FirmAudit/list";
+    }
+
+    //跳转网站用户管理页面
+    @RequestMapping("toSitesUser")
+    public   String toSitesUser(){
+        return  "sitesUser/show";
+    }
+
+    @RequestMapping("toIndex")
+    public  String  toIndex(){
+        return  "index";
+    }
+
 }

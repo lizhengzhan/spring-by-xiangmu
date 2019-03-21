@@ -14,7 +14,6 @@
     <title>Title</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/time/css/material.min.css" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/time/css/bootstrap-material-datetimepicker.css" />
-    <script src="<%=request.getContextPath() %>/time/js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/time/js/material.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/time/js/moment-with-locales.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/time/js/bootstrap-material-datetimepicker.js"></script>
@@ -29,32 +28,34 @@
     <form id="myForm">
         <div class="row">
             <div class="col-md-2">
-                <label for="consumerName">姓名:</label>
+                <label for="userName2">姓名:</label>
             </div>
             <div class="col-md-4">
-                <input type="text" name="consumerId" id="consumerId" style="display: none">
-                <input type="text" class="form-control" name="consumerName" id="consumerName">
+                <input type="text" name="userId" id="userId" style="display: none">
+                <input type="text" name="grades" id="grades" style="display: none">
+                <input type="text" name="areapids" id="areapids" style="display: none">
+                <input type="text" class="form-control" name="userName" id="userName2">
             </div>
 
             <div class="col-md-2">
-                <label for="consumerCastId">登陆账号:</label>
+                <label for="loginNumber">登陆账号:</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="consumerCastId" id="consumerCastId">
+                <input type="text" class="form-control" name="loginNumber" id="loginNumber">
             </div>
         </div>
         <div class="row">
             <div class="col-md-2">
-                <label for="consumerPhone">密码:</label>
+                <label for="password">密码:</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="consumerPhone" id="consumerPhone">
+                <input type="text" class="form-control" name="password" id="password">
             </div>
             <div class="col-md-2">
-                <label for="consumerCode">邮箱:</label>
+                <label for="email">邮箱:</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="consumerCode" id="consumerCode">
+                <input type="text" class="form-control" name="email" id="email">
             </div>
         </div>
         <div class="row">
@@ -67,17 +68,18 @@
                     </select>
             </div>
             <div class="col-sm-3">
-                <select name="input_city" id="input_city" class="form-control">
+                <select name="areapid" id="areapid" class="form-control">
                     <option value=""></option>
                 </select>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <label for="userSex">性别:</label>
             </div>
             <div class="col-md-2">
                 <select class="form-control"  name="userSex" id="userSex">
+                    <option value="">--请选择--</option>
                     <option value="1">男</option>
-                    <option value="0">女</option>
+                    <option value="2">女</option>
                 </select>
             </div>
         </div>
@@ -101,42 +103,62 @@
     </form>
 </div>
 <script type="text/javascript">
-    $(document).ready(function()
-    {
-        $('#createTime').bootstrapMaterialDatePicker({ format : 'YYYY-MM-DD', minDate : new Date() });
-    })
+    $(document).ready(function(){
+        $('#userBirthday').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+    });
+
     $(function () {
-        var html = "";
-        $("#input_city").append(html);
-        /*$("#input_area").append(html);*/
+        $.ajax({
+            url:"<%=request.getContextPath() %>/role/queryRole",
+            success:function(data){
+                var shot = "";
+                $.each(data, function (idx, item) {
+                    shot += "<option value=" + item.id + " >" + item.info + "</option>";
+                });
+                $("#roleId").append(shot);
+            }
+        });
+
         $.ajax({
             url:"<%=request.getContextPath() %>/area/queryArea?ids=0",
             type:"post",
             success:function(data){
+                var html = "";
                 $.each(data, function (idx, item) {
                     html += "<option value=" + item.id + " >" + item.name + "</option>";
                 });
                 $("#input_province").append(html);
+                $("#input_province").val($("#grades").val());
+                $("#input_province").change();
             }
         });
     });
 
     $("#input_province").change(function () {
         if ($(this).val() == "") return;
-        $("#input_city option").remove();
+        $("#areapid option").remove();
         var code = $(this).find("option:selected").val();
-        var html = "<option value=''>--请选择--</option>";
+
         $.ajax({
             url:"<%=request.getContextPath() %>/area/queryArea2?ids="+code,
             type:"post",
             success:function(data){
+                var areapids = $("#areapids").val();
+                var html = "<option value=''>--请选择--</option>";
                 $.each(data, function (idx, item) {
+                    if(areapids == item.id){
+                        html += "<option value=" + item.id + " selected = 'selected'>" + item.name + "</option>";
+                    }else {
                     html += "<option value=" + item.id + " >" + item.name + "</option>";
+                    }
                 });
-                $("#input_city").append(html);
+                $("#areapid").append(html);
+                /*alert($("#areapids").val());
+                $("#areapid").val($("#areapids").val());*/
             }
         });
     });
+
 </script>
 </body>
 </html>

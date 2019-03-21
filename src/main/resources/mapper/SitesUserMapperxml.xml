@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.SitesUserMapper">
+ <resultMap type="com.jk.bean.SitesUserBean" id="ListMap">
+        <id  column="id" property="id"/>
+        <result column="user_name" property="userName"/>
+        <result column="password" property="password"/>
+         <result column="user_email" property="userEmail"/>
+         <result column="user_phone" property="userPhone"/>
+        <result column="crtime" property="crtime"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="baycars" property="baycars"/>
+        <result column="sellcars" property="sellcars"/>
+ </resultMap>
+
+    <select id="querySitesUser"  resultMap="ListMap">
+        select  ts.*, kf.fullname  from t_sites_user  ts
+        left join  kf_area kf on ts.city=kf.id
+        left join  t_brand b  on ts.id=b.id
+        <include refid="utilPage"></include>
+         group  by ts.id limit #{start},#{rows}
+    </select>
+
+    <select id="querySitesUserTotal"   resultType="long" parameterType="com.jk.bean.SitesUserBean" >
+        select count(*) from t_sites_user  <include refid="utilPage"></include>
+    </select>
+
+    <select id="queryLogin" parameterType="string" resultMap="ListMap">
+	select * from t_sites_user u where u.user_name = #{userName}
+  </select>
+    <sql id="utilPage">
+        where 1 = 1
+    </sql>
+</mapper>

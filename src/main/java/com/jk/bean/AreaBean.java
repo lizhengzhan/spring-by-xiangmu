@@ -24,9 +24,6 @@ public class AreaBean {
     @Column(name = "modifydate")
     private Date modifyDate;
 
-    @Column(name = "sort")
-    private Integer sort;
-
     @Column(name = "fullname")
     private String fullName;
 
@@ -36,11 +33,8 @@ public class AreaBean {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "treepath")
-    private String treePath;
-
     @Column(name = "parentid")
-    private Integer parentId;
+        private Integer parentId;
 
     public Integer getId() {
         return id;
@@ -66,14 +60,6 @@ public class AreaBean {
         this.modifyDate = modifyDate;
     }
 
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
-
     public String getFullName() {
         return fullName;
     }
@@ -96,14 +82,6 @@ public class AreaBean {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getTreePath() {
-        return treePath;
-    }
-
-    public void setTreePath(String treePath) {
-        this.treePath = treePath;
     }
 
     public Integer getParentId() {

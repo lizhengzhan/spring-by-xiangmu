@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.AreaMapper">
+    <sql id="queryPage">
+        where 1=1
+        <if test="areaBean.name!=null and areaBean.name!=''">
+            and  a.name like '%${areaBean.name}%'
+        </if>
+    </sql>
+    <select id="queryAreaListSum" resultType="long">
+      select count(*) from kf_area a
+        <include refid="queryPage"></include>
+        and grade = #{ids}
+    </select>
+    <select id="queryAreaList" resultType="com.jk.bean.AreaBean" >
+        select * from kf_area a
+        <include refid="queryPage"></include>
+        and grade = #{ids}
+        limit #{start},#{rows}
+    </select>
+
+
+    <select id="queryAreaListSumByPid" resultType="long">
+        select count(*) from kf_area a
+        <include refid="queryPage"></include>
+        and parentid = #{ids}
+    </select>
+    <select id="queryAreaListByPid" resultType="com.jk.bean.AreaBean" >
+        select * from kf_area a
+        <include refid="queryPage"></include>
+        and parentid = #{ids}
+        limit #{start},#{rows}
+    </select>
+
+</mapper>

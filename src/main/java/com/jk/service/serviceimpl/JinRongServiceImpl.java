@@ -1,6 +1,7 @@
 package com.jk.service.serviceimpl;
 
 import com.jk.bean.YiXiangUserBean;
+import com.jk.bean.YuYueBean;
 import com.jk.mapper.JinRongMapper;
 import com.jk.service.JinRongService;
 import org.apache.ibatis.annotations.Param;
@@ -40,5 +41,41 @@ public class JinRongServiceImpl implements JinRongService {
     @Override
     public YiXiangUserBean queryConsumerById(String id) {
         return jinRongMapper.queryConsumerById(id);
+    }
+
+    @Override
+    public List<YuYueBean> queryYuYueList() {
+        return jinRongMapper.queryYuYueList();
+    }
+
+    @Override
+    public void saveYuYue(YuYueBean yuYueBean) {
+        jinRongMapper.saveYuYue(yuYueBean);
+    }
+
+    @Override
+    public void delYuYue(String ids) {
+        String[] idList = ids.split(",");
+        jinRongMapper.delYuYue(idList);
+    }
+
+    @Override
+    public List<YuYueBean> queryDaiChuLiByKeFuId(String id) {
+        return jinRongMapper.queryDaiChuLiByKeFuId(id);
+    }
+
+    @Override
+    public List<YuYueBean> queryYiChuLiByKeFuId(String id) {
+        return jinRongMapper.queryYiChuLiByKeFuId(id);
+    }
+
+    @Override
+    public YuYueBean selectYuYueById(String id) {
+        return jinRongMapper.selectYuYueById(id);
+    }
+
+    @Override
+    public void updateYuYue(YuYueBean yuYueBean) {
+        jinRongMapper.updateYuYue(yuYueBean);
     }
 }

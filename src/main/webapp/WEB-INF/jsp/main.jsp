@@ -26,7 +26,7 @@
             </a>
         </div>
         <div class="navbar-right">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="<%=request.getContextPath()%>/remove">
                 欢迎！！！${sessionScope.user.userName }登陆本后台管理系统！
             </a>
         </div>
