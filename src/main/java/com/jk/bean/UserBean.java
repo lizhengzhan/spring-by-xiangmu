@@ -25,7 +25,7 @@ public class UserBean {
 
     @Column(name = "userbirthday")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="yyyy-MM-dd HH-mm-ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date userBirthday;
 
     @Column(name = "roleid")
@@ -37,7 +37,11 @@ public class UserBean {
     @Column(name = "email")
     private String email;
 
-    //业务字段
+    @Column(name = "loginnumber")
+    private String loginNumber;
+
+
+//业务字段
 
     @Transient
     private String createDate;
@@ -60,6 +64,8 @@ public class UserBean {
     @Transient
     private String info;
 
+    @Transient
+    private String grade;
 
     public Integer getUserId() {
         return userId;
@@ -163,5 +169,37 @@ public class UserBean {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public Integer getAreapid() {
+        return areapid;
+    }
+
+    public void setAreapid(Integer areapid) {
+        this.areapid = areapid;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getLoginNumber() {
+        return loginNumber;
+    }
+
+    public void setLoginNumber(String loginNumber) {
+        this.loginNumber = loginNumber;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 }

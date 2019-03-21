@@ -27,4 +27,23 @@ public class UserController {
     public void delUserAll(String ids){
         userServiec.delUserAll(ids);
     }
+
+    @ResponseBody
+    @RequestMapping("addUserAdd")
+    public void addUserAdd(UserBean userBean){
+        System.out.println("111");
+        userServiec.addUserAdd(userBean);
+    }
+
+    @ResponseBody
+    @RequestMapping("queryUserById")
+    public UserBean queryUserById(Integer id){
+        return userServiec.queryUserById(id);
+    }
+
+    @ResponseBody
+    @RequestMapping("updateUserPassword")
+    public void updateUserPassword(UserBean userBean){
+        userServiec.updateUserPassword(userBean);
+    }
 }

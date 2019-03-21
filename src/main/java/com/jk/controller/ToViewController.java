@@ -8,7 +8,7 @@ public class ToViewController {
 
     @RequestMapping("toLogin")
     public String toLogin(){
-        return "login";
+        return "../login.jsp";
     }
 
     @RequestMapping("toMain")
@@ -61,5 +61,20 @@ public class ToViewController {
     @RequestMapping("toBrandAdd")
     public String toBrandAdd(){
         return "brand/brandAdd";
+    }
+
+    @RequestMapping("toQueryArea")
+    public String toQueryArea(){
+        return "area/area";
+    }
+
+    @RequestMapping("toAreaAdd")
+    public String toAreaAdd(){
+        return "area/add";
+    }
+
+    @RequestMapping("toUserUpdatePassword")
+    public String toUserUpdatePassword(){
+        return "user/upPassword";
     }
 }

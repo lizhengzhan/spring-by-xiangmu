@@ -10,7 +10,7 @@
 <head>
     <title>Title</title>
     <%--jquery 的js--%>
-    <script  type="text/javascript"  src="jquery-easyui-1.5/jquery.min.js"></script>
+    <script  type="text/javascript"  src="<%=request.getContextPath() %>/jquery-easyui-1.5/jquery.min.js"></script>
     <!-- 引入bootstrap的js、css -->
     <link rel="stylesheet" href="<%=request.getContextPath() %>/js/bootstrap3/css/bootstrap.css">
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/bootstrap3/js/bootstrap.js"></script>
@@ -48,12 +48,13 @@
         </div>
     </div>
     <div id="toolbars" class="btn-group">
-    <button id="btn_add" type="button" class="btn btn-default">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true" onclick="openAdd()">新增</span>
-    </button>
-    <button id="btn_delete" type="button" class="btn btn-default">
-        <span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="delUser()">删除</span>
-    </button>
+        <button id="btn_add" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true" onclick="openAdd()">新增</span>
+        </button>
+        <button id="btn_delete" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="delUser()">删除</span>
+        </button>
+    </div>
 </div>
 <table class="table" id="myTable"></table>
 
@@ -146,7 +147,7 @@
                     "className" : "btn-sm btn-success",
                     "callback" : function() {
                         $.ajax({
-                            url:'<%=request.getContextPath() %>/addCompany',
+                            url:'<%=request.getContextPath() %>/user/addUserAdd',
                             type:'post',
                             data:$("#myForm").serialize(),
                             success:function(data){
@@ -167,9 +168,95 @@
         });
     }
 
+    //打开修改页面
+    function openUpdate(id){
+        bootbox.dialog({
+            title:'修改用户信息',
+            message: createAddContent("<%=request.getContextPath() %>/toUserAdd"),
+            closeButton: true,
+            buttons : {
+                "success" : {
+                    "label" : "<i class='glyphicon glyphicon-ok'></i> 保存",
+                    "className" : "btn-sm btn-success",
+                    "callback" : function() {
+                        $.ajax({
+                            url:'<%=request.getContextPath() %>/user/addUserAdd',
+                            type:'post',
+                            data:$("#myForm").serialize(),
+                            success:function(data){
+                                searchUser();
+                            }
+                        });
+                    }
+                },
+                "cancel" : {
+                    "label" : "<i class='glyphicon glyphicon-remove'></i> 取消",
+                    "className" : "btn-sm btn-danger",
+                    "callback" : function() {
+
+                    }
+                }
+            }
+
+        });
+        //回显数据
+        $.ajax({
+            url:"<%=request.getContextPath() %>/user/queryUserById",
+            type:"post",
+            data:{id:id},
+            async:true,
+            success:function(data){
+                $("#userName2").val(data.userName);
+                $("#loginNumber").val(data.loginNumber);
+                $("#password").prop("disabled","true");
+                $("#password").val("**************");
+                $("#email").val(data.email);
+                $("#consumerCode").val(data.consumerCode);
+                $("#userSex").val(data.userSex);
+                $("#userBirthday").val(data.userBirthday.substr(0,10));
+                $("#userId").val(data.userId);
+                $("#grades").val(data.grade);
+                $("#roleId").val(data.roleId);
+                $("#areapids").val(data.areapid);
+            }
+        })
+    }
+
+    function openUpdatePassword(id){
+        bootbox.dialog({
+            title:'修改用户信息',
+            message: createAddContent("<%=request.getContextPath() %>/toUserUpdatePassword"),
+            closeButton: true,
+            buttons : {
+                "success" : {
+                    "label" : "<i class='glyphicon glyphicon-ok'></i> 保存",
+                    "className" : "btn-sm btn-success",
+                    "callback" : function() {
+                        $.ajax({
+                            url:'<%=request.getContextPath() %>/user/updateUserPassword',
+                            type:'post',
+                            data:$("#myForm").serialize(),
+                            success:function(data){
+                                searchUser();
+                            }
+                        });
+                    }
+                },
+                "cancel" : {
+                    "label" : "<i class='glyphicon glyphicon-remove'></i> 取消",
+                    "className" : "btn-sm btn-danger",
+                    "callback" : function() {
+                    }
+                }
+            }
+        });
+        $("#userId").val(id);
+    }
+
+
     //条查刷新
     function searchUser(){
-        $('#myTable').bootstrapTable('refresh');//刷新表格
+        $('#myTable').bootstrapTable('refresh');
     }
 
     //初始化表格数据
@@ -202,6 +289,8 @@
                 {field:"check",checkbox:true},
                 {field:"userId",title:"id"},
                 {field:"userName",title:"用户名称"},
+                {field:"loginNumber",title:"登陆账号"},
+                {field:"email",title:"电子邮箱"},
                 {field:"userSex",title:"用户性别",formatter:function(value,row,index){
                         return value==null?'暂未设置':value==1?'男':'女';
                     }},
@@ -215,7 +304,7 @@
                         return value==null?'暂未设置':value;
                     }},
                 {field:"tools",title:"操作",formatter:function(value,row,index){
-                        return "<a href='javascript:openUpdate("+row.userId+")'>修改</a>";
+                        return "<a href='javascript:openUpdate("+row.userId+")'>修改</a>     <a href='javascript:openUpdatePassword("+row.userId+")'>修改密码</a>";
                 }}
             ]
         })
