@@ -125,8 +125,4 @@ public class ToViewController {
         return  "index";
     }
 
-    @RequestMapping("aa")
-    public  String  aa(){
-        return  "aa";
-    }
 }
