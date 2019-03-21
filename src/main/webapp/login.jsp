@@ -16,8 +16,8 @@
 
 <!-- 登陆框架 -->
 <link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
-
-<link rel="stylesheet" href="<%=request.getContextPath() %>/alter/example.scss">
+<%--
+<link rel="stylesheet" href="<%=request.getContextPath() %>/alter/example.scss">--%>
 <!-- This is what you need -->
 <script src="<%=request.getContextPath() %>/alter/sweet-alert.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/alter/sweet-alert.css">

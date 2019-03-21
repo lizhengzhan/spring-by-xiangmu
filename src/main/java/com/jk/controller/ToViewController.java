@@ -8,7 +8,7 @@ public class ToViewController {
 
     @RequestMapping("toLogin")
     public String toLogin(){
-        return "../login.jsp";
+        return "../login";
     }
 
     @RequestMapping("toMain")
