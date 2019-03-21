@@ -133,4 +133,9 @@ public class ToViewController {
         return  "index";
     }
 
+    @RequestMapping("toError")
+    public  String  error(){
+        return  "error";
+    }
+
 }

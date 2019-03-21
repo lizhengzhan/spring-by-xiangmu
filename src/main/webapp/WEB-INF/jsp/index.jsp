@@ -774,7 +774,7 @@
                 <div class="login-top sign-top">
                     <div class="agileits-login">
                         <h5>Login</h5>
-                        <form action="#" method="post" id="loginForm">
+                        <form action="#" method="post">
                             <input type="email" class="userName" name="userName" placeholder="userName" required=""/>
                             <input type="password" class="password" name="password" placeholder="password" required=""/>
                             <div class="wthree-text">
@@ -803,28 +803,37 @@
 
 </body>
 <script type="text/javascript">
-    //登录
+
+
+
+    //按钮事件
+    $('#btnSumit').click(function() {
+    });
+    //回车提交事件
+    $("body").keydown(function() {
+        if (event.keyCode == "13") {//keyCode=13是回车键
+            $('#btnSumit').click();
+        }
+    });
+
     function queryLogin(){
-        $("#loginForm").form("submit",{
-            url:"<%=request.getContextPath() %>/queryLogin",
+        var userEmail = $("#userEmail").val();
+        var password = $("#password").val();
+        $.ajax({
+            url:"<%=request.getContextPath()%>/loginUser",
+            data:{"userName":userEmail,"password":password},
             success:function(data){
-                bootbox.alert({
-                    size: "small",
-                    title: "提示",
-                    message: "登录成功！",
-                    buttons: {
-                        ok: {
-                            label: '确定',
-                            className: 'btn-success'
-                        }
-                    },
-                    callback: function(){}
-                });
-                if(data=="登录成功"){
-                    location.href="<%=request.getContextPath() %>/aa";
+                swal(data, "", "error")
+                if(data == "登陆成功！"){
+                    swal(data, "", "success")
+                    setTimeout(function(){location.href="<%=request.getContextPath()%>/toError"}, 1000);
                 }
+            },
+            error:function(){
+                $.messager.alert("提示驾到","登录失败","error");
             }
         })
     }
+
 </script>
 </html>
