@@ -34,11 +34,34 @@ public class ToViewController {
     @RequestMapping("toAdd")
     public  String  toAdd(){
         return "company/addCompany";
+
+    }
+
+    @RequestMapping("toService")
+    public String toService(){
+        return "server/list";
+    }
+
+    @RequestMapping("toServerAdd")
+    public String toServerAdd(){
+        System.out.println("12312312312");
+        return "server/adduser";
+    }
+
+    @RequestMapping("toUpdate")
+    public String toUpdate(){
+        return "server/updateuser";
     }
 
     @RequestMapping("toYiXiang")
     public  String  toYiXiang(){
         return  "jinrong/list";
+    }
+
+
+    @RequestMapping("toAddCooper")
+    public   String  toAddCooper(){
+        return  "Cooperatives/addCooper";
     }
 
     @RequestMapping("toUser")
@@ -76,5 +99,34 @@ public class ToViewController {
     @RequestMapping("toUserUpdatePassword")
     public String toUserUpdatePassword(){
         return "user/upPassword";
+    }
+
+
+    //跳转汽车审核页面
+    @RequestMapping("toCarAuditLits")
+    public   String  toCarAuditLits(){
+        return   "carAudit/list";
+    }
+
+    //跳转企业审核
+    @RequestMapping("toFirmAudit")
+    public  String toFirmAudit(){
+        return  "FirmAudit/list";
+    }
+
+    //跳转网站用户管理页面
+    @RequestMapping("toSitesUser")
+    public   String toSitesUser(){
+        return  "sitesUser/show";
+    }
+
+    @RequestMapping("toIndex")
+    public  String  toIndex(){
+        return  "index";
+    }
+
+    @RequestMapping("aa")
+    public  String  aa(){
+        return  "aa";
     }
 }

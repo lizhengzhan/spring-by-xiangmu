@@ -30,9 +30,33 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/js/bootstrap-fileinput/css/fileinput.css">
 </head>
 <body>
-<table class="tabls" id="cooperTable"></table>
+<div id="toolbar">
+    <form class="form-inline">
+        <button onclick="addCooper()" type="button" class="btn btn-success glyphicon glyphicon-plus">新增</button>
+    </form>
+</div>
+
+
+<table class="table" id="cooperTable"></table>
 </body>
 <script>
+
+    var res;
+    function createAddContent(url){
+        $.ajax({
+            url:url,
+            async:false,
+            success:function(data){
+                res = data;
+            }
+        });
+        return res;
+    }
+
+    function searchUser(){
+        $('#cooperTable').bootstrapTable('refresh');
+    }
+
     $(function () {
         initCooperivateTable();
     })
@@ -45,6 +69,8 @@
             pageList:[5, 10, 20, 50],//分页组件
             pageNumber:1,
             pageSize:5,//默认每页条数
+            height: 650,
+            showRefresh: true,
             queryParams:function(){
                 return {
                     page:this.pageNumber,
@@ -58,16 +84,88 @@
                 {field:"id",title:"id"},
                 {field:"phone",title:"手机"},
                 {field:"email",title:"邮箱"},
-                {field:"site",title:"地址"},
+                {field:"fullName",title:"地址"},
                 {field:"capital",title:"注册资金"},
-                {field:"creditUnionCode",title:"统一社用社代码"},
+                {field:"credit",title:"统一社用社代码"},
                 {field:"registration",title:"纳税人识别号"},
                 {field:"registrationNumber",title:"注册号"},
-                {field:"organizationCode",title:"组织机构代码"},
+                {field:"organ",title:"组织机构代码"},
                 {field:"companyType",title:"公司类型"},
-                {field:"info",title:"简介"}
+                {field:"info",title:"简介"},
+                {field:"status",title:"审核",formatter:function(value,row,index){
+                        if (value==0) {
+                            return  "需要得到审核";
+                        }else {
+                            return  "";
+                        }
+                    }},
+                {field:"toolls",title:"",formatter:function(value,row,index){
+                    if (row.status==0){
+                        return "<button type=\"button\" class=\"btn btn-default\" onclick='checks("+row.id+")'>审核</button>\n";
+                    }
+                    }}
             ]
         })
     }
+
+    //审核
+    function checks(id) {
+        $.ajax({
+            url:"<%=request.getContextPath() %>/checks",
+            type:"post",
+            data:{id:id},
+            success:function(){
+                bootbox.alert({
+                    size: "small",
+                    title: "提示",
+                    message: "审核成功！",
+                    buttons: {
+                        ok: {
+                            label: '确定',
+                            className: 'btn-success'
+                        }
+                    },
+                    callback: function(){}
+                });
+                searchUser();//刷新表格
+            }
+        })
+
+    }
+
+    //打开添加页面
+    function addCooper(){
+        bootbox.dialog({
+            title:'添加企业信息',
+            message: createAddContent("<%=request.getContextPath() %>/toAddCooper"),
+            closeButton: true,
+            buttons : {
+                "success" : {
+                    "label" : "<i class='glyphicon glyphicon-ok'></i> 保存",
+                    "className" : "btn-sm btn-success",
+                    "callback" : function() {
+                        $.ajax({
+                            url:'<%=request.getContextPath() %>/addCooperativen',
+                            type:'post',
+                            data:$("#cooperForm").serialize(),
+                            success:function(data){
+                                //$('#myTable').bootstrapTable('refresh');
+                                searchUser();
+                            }
+                        });
+                    }
+                },
+                "cancel" : {
+                    "label" : "<i class='glyphicon glyphicon-remove'></i> 取消",
+                    "className" : "btn-sm btn-danger",
+                    "callback" : function() {
+
+                    }
+                }
+            }
+
+        });
+    }
+
 </script>
 </html>

@@ -12,6 +12,7 @@ public interface BrandService {
     //新增
     void addBrand(BrandBean brand);
 
-    //删除
-    void deleteBrand(Integer id);
+
+    //批删+删除
+    void deleteBrand(String[] ids);
 }

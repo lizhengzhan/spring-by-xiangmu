@@ -71,7 +71,7 @@
     }
 
     function searchUser(){
-        $('#myTable').bootstrapTable('refresh')
+        $('#myTable').bootstrapTable('refresh');
     }
 
 
@@ -105,14 +105,23 @@
                 {field:"userName",title:"企业董事"},
                 {field:"createTime",title:"企业创建时间"},
                 {field:"contact",title:"是否联系",formatter:function(value,row,index){
-                        return value==1?"联系":value==0?"等会联系":"";
+                    if(value==1){
+                        return  "联系";
+                    }else if(value==0){
+                        return  "等会联系";
+                    }else{
+                        return  "";
+                    }
                 }},
                 {field:"tools",title:"操作",formatter:function(value,row,index){
                         return "<button  class=\"btn btn-warning\"><a href='javascript:openUpdate("+row.id+")'>修改</a></button>\n";
                     }},
                 {field:"toolss",title:"",formatter:function(value,row,index){
-
-                        return row.contact==1?"<button  class=\"btn btn-success\"><a href='javascript:openRelation("+row.id+")'>取消联系</a></button>\n":row.contact==0?"<button  class=\"btn btn-default\"><a href='javascript:openAawait("+row.id+")'>联系</a></button>\n":"";
+                    if(row.contact==1){
+                        return  "<button  class=\"btn btn-success\"><a href='javascript:openRelation("+row.id+")'>取消联系</a></button>\n";
+                    }else{
+                       return  "<button  class=\"btn btn-default\"><a href='javascript:openAawait("+row.id+")'>联系</a></button>\n";
+                    }
                     }}
             ]
         })
@@ -156,7 +165,7 @@
     //打开修改页面
     function openUpdate(id){
         bootbox.dialog({
-            title:'修改用户信息',
+            title:'修改企业信息',
             message: createAddContent("<%=request.getContextPath() %>/updateCompany"),
             closeButton: true,
             buttons : {
@@ -259,98 +268,48 @@
         })
     }
     //联系
-    function openRelation(){
-        //bootbox.alert("Your message here…");
-        bootbox.confirm({
-            size: "small",
-            title:"提示",
-            message: "是否确认联系",
-            buttons: {
-                confirm: {
-                    label: '确定',
-                    className: 'btn-success'
-                },
-                cancel: {
-                    label: '取消',
-                    className: 'btn-danger'
-                }
-            },
-            callback: function(result){
-                if(result){
-                    var arr = $('#myTable').bootstrapTable('getSelections'); //获取表选择的行
-                    var ids = "";
-                    for(var i=0;i<arr.length;i++){
-                        ids+=ids==""?arr[i].id:","+arr[i].id;
-                    }
-                    $.ajax({
-                        url:"<%=request.getContextPath() %>/await",
-                        type:"post",
-                        data:{ids:ids},
-                        success:function(){
-                            bootbox.alert({
-                                size: "small",
-                                title: "提示",
-                                message: "联系成功！",
-                                buttons: {
-                                    ok: {
-                                        label: '确定',
-                                        className: 'btn-success'
-                                    }
-                                },
-                                callback: function(){}
-                            })
-                            searchUser();//刷新表格
+    function openRelation(id){
+        $.ajax({
+            url:"<%=request.getContextPath()%>/relation",
+            type:"post",
+            data:{id:id},
+            success:function(){
+                bootbox.alert({
+                    size: "small",
+                    title: "提示",
+                    message: "联系成功！",
+                    buttons: {
+                        ok: {
+                            label: '确定',
+                            className: 'btn-success'
                         }
-                    })
-                }
+                    },
+                    callback: function(){}
+                });
+                searchUser();//刷新表格
             }
         })
     }
     //等会联系
-    function openAawait(){
-        //bootbox.alert("Your message here…");
-        bootbox.confirm({
-            size: "small",
-            title:"提示",
-            message: "是否确认等会联系",
-            buttons: {
-                confirm: {
-                    label: '确定',
-                    className: 'btn-success'
-                },
-                cancel: {
-                    label: '取消',
-                    className: 'btn-danger'
-                }
-            },
-            callback: function(result){
-                if(result){
-                    var arr = $('#myTable').bootstrapTable('getSelections'); //获取表选择的行
-                    var ids = "";
-                    for(var i=0;i<arr.length;i++){
-                        ids+=ids==""?arr[i].id:","+arr[i].id;
-                    }
-                    $.ajax({
-                        url:"<%=request.getContextPath() %>/relation",
-                        type:"post",
-                        data:{ids:ids},
-                        success:function(){
-                            bootbox.alert({
-                                size: "small",
-                                title: "提示",
-                                message: "联系成功！",
-                                buttons: {
-                                    ok: {
-                                        label: '确定',
-                                        className: 'btn-success'
-                                    }
-                                },
-                                callback: function(){}
-                            })
-                            searchUser();//刷新表格
+    function openAawait(id){
+        $.ajax({
+            url:"<%=request.getContextPath()%>/await",
+            type:"post",
+            data:{id:id},
+            success:function(){
+                bootbox.alert({
+                    size: "small",
+                    title: "提示",
+                    message: "已通知为等会联系!！",
+                    buttons: {
+                        ok: {
+                            label: '确定',
+                            className: 'btn-success'
                         }
-                    })
-                }
+                    },
+                    callback: function(){}
+                });
+                searchUser();//刷新表格
             }
         })
     }

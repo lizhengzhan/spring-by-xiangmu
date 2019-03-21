@@ -22,4 +22,17 @@ public class CooperativesController {
         return  cooperativesService.queryCooperatives(page,rows,cooperativesBean);
     }
 
+    @ResponseBody
+    @RequestMapping("addCooperativen")
+    public  void     addCooperativen(CooperativesBean cooperativesBean){
+        cooperativesService.addCooperativen(cooperativesBean);
+    }
+
+    //审核
+
+    @RequestMapping("checks")
+    @ResponseBody
+    public   void checks(Integer  id){
+        cooperativesService.checks(id);
+    }
 }

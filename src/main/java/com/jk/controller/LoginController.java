@@ -4,18 +4,22 @@ import com.jk.bean.UserBean;
 import com.jk.service.LoginService;
 import com.jk.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 
-@RestController
+@Controller
 public class LoginController {
 
     @Autowired
     private LoginService loginService;
 
     @GetMapping(value = "loginUser")
+    @ResponseBody
     public String loginUser(UserBean userBean, HttpSession session){
 
         if(userBean == null){
@@ -35,6 +39,13 @@ public class LoginController {
         }
         session.setAttribute("user",user);
         return "登陆成功！";
+    }
+
+    //注销
+    @RequestMapping("remove")
+    public String remove(HttpSession session){
+        session.removeAttribute("user");
+        return "login";
     }
 
 }

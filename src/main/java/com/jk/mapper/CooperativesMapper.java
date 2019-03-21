@@ -18,4 +18,9 @@ public interface CooperativesMapper {
     List<CompanyBean> queryCooperatives(@Param("start") int start, @Param("rows")Integer rows, @Param("cooperativesBean")CooperativesBean cooperativesBean);
 
 
+    //新增
+    void addCooperativen(CooperativesBean cooperativesBean);
+
+    //审核
+    void checks(Integer id);
 }
