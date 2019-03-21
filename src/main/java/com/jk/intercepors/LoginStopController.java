@@ -44,8 +44,7 @@ public class LoginStopController implements HandlerInterceptor {
                 || server.toString().contains(".jpg") || server.toString().contains(".com")
                 || server.toString().contains(".png")|| server.toString().contains(".do")
                 || server.toString().contains(".ttf")|| server.toString().contains("error")
-                || server.toString().contains("logo.png") || server.toString().contains(".js:5")
-                || server.toString().contains(".cur")){
+                || server.toString().contains("logo.png") || server.toString().contains(".cur")){
             return true;
         }
         /*System.out.println("拦截成功");*/
