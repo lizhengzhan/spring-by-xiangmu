@@ -32,6 +32,17 @@ public class ServerBean {
     @Column(name = "getMoney")
     private String getMoney;
 
+    //
+    @Transient
+    private String area;
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
 
     public Integer getId() {
         return id;

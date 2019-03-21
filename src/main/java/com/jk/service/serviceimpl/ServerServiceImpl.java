@@ -1,6 +1,7 @@
 package com.jk.service.serviceimpl;
 
 import com.jk.bean.ServerBean;
+import com.jk.bean.UserBean;
 import com.jk.mapper.ServerMapper;
 import com.jk.service.ServerService;
 import com.jk.util.PageUtil;
@@ -26,7 +27,6 @@ public class ServerServiceImpl implements ServerService {
         //查询显示信息
         //开始位置
         int start = (page-1)*rows;
-        System.out.println("--------------------"+start);
         List<ServerBean> list = mapper.queryListPage(start,rows);
         hashMap.put("total", total);
         hashMap.put("rows", list);
@@ -51,5 +51,15 @@ public class ServerServiceImpl implements ServerService {
     @Override
     public void delServerById(int parseInt) {
         mapper.delServerById(parseInt);
+    }
+
+    @Override
+    public List<UserBean> allotAuth(Integer id) {
+        return mapper.allotAuth(id);
+    }
+
+    @Override
+    public void updateStatus(Integer id) {
+        mapper.updateStatus(id);
     }
 }

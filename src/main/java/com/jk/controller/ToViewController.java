@@ -3,6 +3,8 @@ package com.jk.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class ToViewController {
 
@@ -45,7 +47,6 @@ public class ToViewController {
 
     @RequestMapping("toServerAdd")
     public String toServerAdd(){
-        System.out.println("12312312312");
         return "server/adduser";
     }
 
@@ -85,5 +86,12 @@ public class ToViewController {
     @RequestMapping("toBrandAdd")
     public String toBrandAdd(){
         return "brand/brandAdd";
+    }
+
+    //分配认证员
+    @RequestMapping("toallotAuth")
+    public String toallotAuth(Integer id, HttpSession session){
+        session.setAttribute("serverId",id);
+        return "server/allotAuth";
     }
 }
