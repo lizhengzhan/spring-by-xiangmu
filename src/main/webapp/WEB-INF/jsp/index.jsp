@@ -10,31 +10,23 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/normalize.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/home/elegant_font/style.css" />
-    <script src="<%=request.getContextPath()%>/home/elegant_font/lte-ie7.js"></script><![endif]-->
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/js/bootstrap3/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/magnific-popup.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/slider-pro.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/owl.carousel.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/owl.theme.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/owl.transitions.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/animate.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/home/elegant_font/style.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/style.css">
-
+    <link rel="shortcut icon" href="#">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
     function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //for-mobile-apps -->
-    <link href="<%=request.getContextPath()%>/homes/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="<%=request.getContextPath()%>/js/bootstrap3/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="<%=request.getContextPath()%>/homes/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="<%=request.getContextPath()%>/homes/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
-    <!--web-fonts-->
-    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
     <style  type="text/css">
         .main-menu{
 
@@ -351,7 +343,7 @@
 
         </div>
     </div>
-    <div class="tlinks">Collect from <a href="http://www.cssmoban.com/" >建站模板</a></div>
+<%--    <div class="tlinks">Collect from <a href="http://www.cssmoban.com/" >建站模板</a></div>--%>
     <!-- Works -->
     <div class="portfolio-works wow fadeIn" data-wow-duration="2s">
 
@@ -683,6 +675,7 @@
 
             </div>
         </div>
+    </div>
 </section>
 
 
@@ -693,7 +686,7 @@
     <div class="container">
         <div class="row footer-containertent">
             <div class="col-md-4">
-                <img src="images/logo.png" alt="">
+                <img src="<%=request.getContextPath()%>/home/images/logo.png" alt="">
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et porro quos iste ratione doloribus asperiores, error omnis delectus rerum sapiente. Et, aliquam modi beatae quae in perferendis ab est fugiat!</p>
             </div>
             <div class="col-md-4">
@@ -742,8 +735,8 @@
 </footer>
 <!-- Footer End -->
 
-<script src="<%=request.getContextPath()%>/home/js/jquery-1.11.3.min.js"></script>
-<script src="<%=request.getContextPath()%>/home/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/jquery-easyui-1.5/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/bootstrap3/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/home/js/modernizr.min.js"></script>
 <script src="<%=request.getContextPath()%>/home/js/jquery.easing.1.3.js"></script>
 <script src="<%=request.getContextPath()%>/home/js/jquery.scrollUp.min.js"></script>
@@ -759,8 +752,6 @@
 <script src="<%=request.getContextPath()%>/home/js/jquery.magnific-popup.min.js"></script>
 <script src="<%=request.getContextPath()%>/home/js/jquery.sliderPro.min.js"></script>
 <script src="<%=request.getContextPath()%>/home/js/owl.carousel.min.js"></script>
-<script src="<%=request.getContextPath()%>/home/contact/jqBootstrapValidation.js"></script>
-<script src="<%=request.getContextPath()%>/home/contact/contact_me.js"></script>
 <script src="<%=request.getContextPath()%>/home/js/custom.js"></script>
 
 
