@@ -41,6 +41,22 @@
                 <label for="carsId">车系</label>
                 <input type="text" class="form-control" id="carsId" placeholder="请输入车系">
             </div>
+            <div class="form-group">
+                <label for="oldId">车龄</label>
+                <input type="text" class="form-control" id="oldId" placeholder="请输入车龄">
+            </div>
+            <div class="form-group">
+                <label for="modelsId">车型</label>
+                <input type="text" class="form-control" id="modelsId" placeholder="请输入车型">
+            </div>
+            <div class="form-group">
+                <label for="mileageId">里程</label>
+                <input type="text" class="form-control" id="mileageId" placeholder="请输入里程">
+            </div>
+            <div class="form-group">
+                <label for="displaceId">排量</label>
+                <input type="text" class="form-control" id="displaceId" placeholder="请输入排量">
+            </div>
             <button onclick="searchBrand()" type="button" class="btn btn-info glyphicon glyphicon-search">搜索</button>
             <button onclick="openAdd()" type="button" class="btn btn-info glyphicon glyphicon-plus">发布</button>
             <button onclick="delBrand()" type="button" class="btn btn-warning glyphicon glyphicon-minus">删除</button>
@@ -194,7 +210,10 @@
                     page:this.pageNumber,
                     rows:this.pageSize,
                     brandName:$("#brandName").val(),
-                    carsId:$("#carsId").val()
+                    carsId:$("#carsId").val(),
+                    oldId:$("#oldId").val(),
+                    modelsId:$("#modelsId").val(),
+                    mileageId:$("#mileageId").val()
                 };
             },
             sidePagination:'server',//分页方式：client客户端分页，server服务端分页

@@ -20,8 +20,7 @@
                     <div class="col-md-4">
                         <input type="text" class="form-control" name="brandName" id="brandName">
                     </div>
-                <%--</div>
-                <div class="row">--%>
+                    <%--车系--%>
                     <div class="col-md-2">
                         <label for="carsId">车系:</label>
                     </div>
@@ -33,13 +32,14 @@
                     </div>
                 </div>
                 <div class="row">
+                    <%--车龄--%>
                     <div class="col-md-2">
                         <label for="oldId">车龄:</label>
                     </div>
                     <div class="col-md-4">
                         <input type="text" class="form-control" name="oldId" id="oldId">
                     </div>
-
+                    <%--车型--%>
                     <div class="col-md-2">
                         <label for="modelsId">车型:</label>
                     </div>
@@ -48,13 +48,14 @@
                     </div>
                 </div>
                 <div class="row">
+                    <%--里程--%>
                     <div class="col-md-2">
                         <label for="mileageId">里程:</label>
                     </div>
                     <div class="col-md-4">
                         <input type="text" class="form-control" name="mileageId" id="mileageId">
                     </div>
-
+                    <%--排量--%>
                     <div class="col-md-2">
                         <label for="displaceId">排量:</label>
                     </div>

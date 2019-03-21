@@ -43,6 +43,7 @@ public class BrandController {
     }
 
     /**
+     *
      * 新增
      * @param brand
      */
@@ -52,7 +53,7 @@ public class BrandController {
         brandService.addBrand(brandBean);
     }
 
-    /**
+    /**mm
      * 批删+单删
      * @param ids
      * @return
@@ -62,4 +63,12 @@ public class BrandController {
     public void deleteBrand(String[] ids){
         brandService.deleteBrand(ids);
     }
+
+  /*  @RequestMapping("failure")
+    @ResponseBody
+    public void failure(Integer id){
+        brandService.failure(id);
+    }*/
 }
+
+
