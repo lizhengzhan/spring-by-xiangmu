@@ -61,7 +61,7 @@
                 {field:"check",checkbox:true},
                 {field:"id",title:"id"},
                 {field:"orderId",title:"订单id"},
-                {field:"adressId",title:"车辆所在地址"},
+                {field:"area",title:"车辆所在地址"},
                 {field:"userId",title:"网站用户ID"},
                 {field:"authMen",title:"认证人"},
                 {field:"status",title:"退车状态",
@@ -90,6 +90,39 @@
         })
     }
 
+    //分配认证员
+    function allotAuth(id){
+        bootbox.dialog({
+            title:'添加用户信息',
+            message: createAddContent("<%=request.getContextPath() %>/toallotAuth?id="+id),
+            closeButton: true,
+            buttons : {
+                "success" : {
+                    "label" : "<i class='glyphicon glyphicon-ok'></i> 保存",
+                    "className" : "btn-sm btn-success",
+                    "callback" : function() {
+                        $.ajax({
+                            url:'<%=request.getContextPath() %>/server/updateStatus',
+                            type:'post',
+                            data:$("#myForm").serialize(),
+                            success:function(data){
+                                //$('#myTable').bootstrapTable('refresh');
+                                searchUser();
+                            }
+                        });
+                    }
+                },
+                "cancel" : {
+                    "label" : "<i class='glyphicon glyphicon-remove'></i> 取消",
+                    "className" : "btn-sm btn-danger",
+                    "callback" : function() {
+
+                    }
+                }
+            }
+
+        });
+    }
     //打开添加页面
     function openAdd(){
         alert("12123123");
@@ -183,7 +216,8 @@
                 //alert(data);
                 $("#id").val(data.id);
                 $("#orderId").val(data.orderId);
-                $("#adressId").val(data.adressId);
+                $("#input_province").append(data.area);
+                $("#adressId").append(data.area);
                 $("#userId").val(data.userId);
                 $("#authMen").val(data.authMen);
                 $("#status").val(data.status);
