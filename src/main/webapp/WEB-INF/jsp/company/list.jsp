@@ -71,7 +71,7 @@
     }
 
     function searchUser(){
-        $('#myTable').bootstrapTable('refresh')
+        $('#myTable').bootstrapTable('refresh');
     }
 
 
@@ -121,7 +121,7 @@
     //打开添加页面
     function openAdd(){
         bootbox.dialog({
-            title:'添加企业信息',
+            title:'添加用户信息',
             message: createAddContent("<%=request.getContextPath() %>/toAdd"),
             closeButton: true,
             buttons : {

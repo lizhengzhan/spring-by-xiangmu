@@ -174,10 +174,54 @@
                 {field:"oldName",title:"车龄"},
                 {field:"modelsName",title:"车型"},
                 {field:"mileageName",title:"里程"},
-                {field:"displaceName",title:"排量"}
+                {field:"displaceName",title:"排量"},
+                {field:"status",title:"状态",formatter:function(value,row,index){
+                        if (value==0) {
+                            return  "需要得到认证";
+                        } else {
+                            return  "";
+                        }
+                    }},
+                {field:"tools",title:"",formatter:function(value,row,index){
+                        if (row.status==0) {
+                            return  "<button type=\"button\" class=\"btn btn-default\" onclick='authentication("+row.id+")'>认证</button>\n";
+                        } else {
+                            return  "";
+                        }
+                    }}
             ]
         })
     }
 
+
+  //刷新页面
+    function searchUser(){
+        $('#myTable').bootstrapTable('refresh');
+    }
+
+
+    //取消订单
+    function  authentication(id){
+        $.ajax({
+            url:"<%=request.getContextPath() %>/authentication",
+            type:"post",
+            data:{id:id},
+            success:function(){
+                bootbox.alert({
+                    size: "small",
+                    title: "提示",
+                    message: "认证成功！",
+                    buttons: {
+                        ok: {
+                            label: '确定',
+                            className: 'btn-success'
+                        }
+                    },
+                    callback: function(){}
+                })
+                searchUser();//刷新表格
+            }
+        })
+    }
 </SCRIPT>
 </html>

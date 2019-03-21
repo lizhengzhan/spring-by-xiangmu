@@ -36,5 +36,10 @@ public class CooperativesServiceImpl  implements   CooperativesService{
         cooperativesMapper.addCooperativen(cooperativesBean);
     }
 
+    @Override
+    public void checks(Integer id) {
+        cooperativesMapper.checks(id);
+    }
+
 
 }

@@ -5,14 +5,14 @@
 
     <!--分页查询-->
     <select id="queryBrandList" resultType="com.jk.bean.BrandBean">
-      select b.*,o.old_name as oldName,c.cars_name as carsName,m.models_name as modelsName,
-              m1.mileage_name as mileageName,d.displacement_name as displaceName,b.brand_name as brandName
-      from t_brand b
-          left join t_cars c on b.cars_id = c.id
-          left join t_old o on b.old_id = o.id
-          left join t_models m on b.models_id = m.id
-          left join t_mileage m1 on b.mileage_id = m1.id
-          left join t_displace d on b.displace_id = d.id
+        select b.*,o.old_name as oldName,c.cars_name as carsName,m.models_name as modelsName,
+        m1.mileage_name as mileageName,d.displacement_name as displaceName,b.brand_name as brandName
+        from t_brand b
+        left join t_cars c on b.cars_id = c.id
+        left join t_old o on b.old_id = o.id
+        left join t_models m on b.models_id = m.id
+        left join t_mileage m1 on b.mileage_id = m1.id
+        left join t_displace d on b.displace_id = d.id
         <include refid="queryPage"></include>
           group by b.id
 
@@ -26,7 +26,7 @@
 
     <!--条查-->
     <sql id="queryPage">
-        where 1 = 1
+        where 1 = 1 and b.status=0
         <if test="brandBean.brandName!=null and brandBean.brandName!=''">
             and  b.brand_name like '%${brandBean.brandName}%'
         </if>
@@ -42,4 +42,6 @@
         insert into t_brand(brandName,carsId,oldId,modelsId,mileageId,displaceId)
             values(#{brandName},#{carsId},#{oldId},#{modelsId},#{mileageId},#{displaceId})
     </insert>
+
+
 </mapper>
