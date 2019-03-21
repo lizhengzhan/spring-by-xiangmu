@@ -31,7 +31,13 @@ public class SitesUserServiceImpl implements SitesUserService {
     }
 
     @Override
-    public SitesUserBean queryLogin(String userName) {
-        return sitesUserMapper.queryLogin(userName);
+    public SitesUserBean queryLogin(String userEmail) {
+        return sitesUserMapper.queryLogin(userEmail);
+    }
+
+    @Override
+    public String enroll(SitesUserBean sitesUserBean) {
+
+        return sitesUserMapper.enroll(sitesUserBean);
     }
 }

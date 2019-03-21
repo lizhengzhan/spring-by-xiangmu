@@ -32,10 +32,10 @@ public class SitesUserController {
     @ResponseBody
     public String queryLogin(SitesUserBean  sitesUserBean, HttpSession session, HttpServletRequest request){
         //根据用户名查询用户信息
-        SitesUserBean sitesUserBean2 = sitesUserService.queryLogin(sitesUserBean.getUserName());
+        SitesUserBean sitesUserBean2 = sitesUserService.queryLogin(sitesUserBean.getUserEmail());
         //验证用户名
         if(sitesUserBean2==null){
-            return "用户名错误";
+            return "邮箱错误";
         }
         //验证密码
         if(!sitesUserBean2.getPassword().equals(sitesUserBean.getPassword())){
