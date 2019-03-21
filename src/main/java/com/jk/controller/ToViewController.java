@@ -100,4 +100,19 @@ public class ToViewController {
         return  "FirmAudit/list";
     }
 
+    //跳转网站用户管理页面
+    @RequestMapping("toSitesUser")
+    public   String toSitesUser(){
+        return  "sitesUser/show";
+    }
+
+    @RequestMapping("toIndex")
+    public  String  toIndex(){
+        return  "index";
+    }
+
+    @RequestMapping("aa")
+    public  String  aa(){
+        return  "aa";
+    }
 }

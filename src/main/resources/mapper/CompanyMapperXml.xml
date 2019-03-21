@@ -64,10 +64,10 @@ values (#{companyEmall},#{companyName},#{companyPhone},#{contact},#{createTime},
     </delete>
 
     <update id="relation" parameterType="int">
-        update t_company  t  set t.contact=1 where t.id =#{id}
+        update t_company  t  set t.contact=0 where t.id =#{id}
     </update>
 
     <update id="await" parameterType="int" >
-        update t_company t set t.contact=0 where t.id =#{id}
+        update t_company t set t.contact=1 where t.id =#{id}
     </update>
 </mapper>

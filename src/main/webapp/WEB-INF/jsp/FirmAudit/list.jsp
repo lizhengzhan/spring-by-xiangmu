@@ -123,7 +123,7 @@
                 searchUser();//刷新表格
             }
         })
-
     }
+    
 </script>
 </html>
