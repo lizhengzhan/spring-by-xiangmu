@@ -4,7 +4,8 @@
 <select id="queryCooperatives" resultType="com.jk.bean.CooperativesBean">
 	SELECT kf.fullname,c.id AS id,c.capital AS capital,c.company_type AS companyType,c.credit AS credit,c.email AS email,c.info AS info,c.officer_net AS officerNet,c.organ AS organ,c.phone AS phone,c.registration AS registration,
 		   c.registration_number AS registrationNumber,c.site AS site,c.STATUS AS STATUS
-	FROM  t_cooperatives c  left  join kf_area kf on c.city=kf.id GROUP BY c.id LIMIT #{start},#{rows}
+	FROM  t_cooperatives c  left  join kf_area kf on c.city=kf.id where c.status=0
+	GROUP BY c.id  LIMIT #{start},#{rows}
 </select>
 
     <!--查询条数-->
@@ -17,6 +18,11 @@
 		insert into t_cooperatives (capital,company_type,credit,email,info,officer_net,organ,phone,registration,registration_number,site,province,city)
 		values (#{capital},#{companyType},#{credit},#{email},#{info},#{officerNet},#{organ},#{phone},#{registration},#{registrationNumber},#{site},#{province},#{city})
 	</insert>
+
+  <!--审核-->
+	<update id="checks" parameterType="Integer">
+		update t_cooperatives  set status=1 where id=#{id}
+	</update>
 
 
 </mapper>

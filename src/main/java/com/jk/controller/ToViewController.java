@@ -94,5 +94,10 @@ public class ToViewController {
         return   "carAudit/list";
     }
 
+    //跳转企业审核
+    @RequestMapping("toFirmAudit")
+    public  String toFirmAudit(){
+        return  "FirmAudit/list";
+    }
 
 }

@@ -245,33 +245,34 @@
     }
 
 
-    //删除用户
-        function authentication(id){
-            $.ajax({
-             url : "<%=request.getContextPath()%>/authentication",
-                async : true,
-                type: "POST",
-                data: {"id":id},
-                dataType: "json",
-                contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                success : function(data) {
-                    if(data == 1){
-                        debugger;
-                        alert("认证成功！");
-                        window.location.reload();
-                    }else{
-                        alert("认证失败！");
-                    }
-                },
-                error : function(e){
-                    alert("代码有问题，请打开F12和debug进行调试！");
-                }
-            });
-        }
+  //刷新页面
+    function searchUser(){
+        $('#myTable').bootstrapTable('refresh');
+    }
 
 
-
-
-
+    //取消订单
+    function  authentication(id){
+        $.ajax({
+            url:"<%=request.getContextPath() %>/authentication",
+            type:"post",
+            data:{id:id},
+            success:function(){
+                bootbox.alert({
+                    size: "small",
+                    title: "提示",
+                    message: "认证成功！",
+                    buttons: {
+                        ok: {
+                            label: '确定',
+                            className: 'btn-success'
+                        }
+                    },
+                    callback: function(){}
+                })
+                searchUser();//刷新表格
+            }
+        })
+    }
 </SCRIPT>
 </html>
