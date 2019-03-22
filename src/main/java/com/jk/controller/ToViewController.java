@@ -138,4 +138,8 @@ public class ToViewController {
         return  "error";
     }
 
+    @RequestMapping("toLog")
+    public String toLog(){
+        return "log/list";
+    }
 }
