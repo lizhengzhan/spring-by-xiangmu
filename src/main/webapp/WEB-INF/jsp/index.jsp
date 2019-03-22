@@ -51,6 +51,7 @@
         <div class="top-nav-text">
             <a class="page-scroll" href="<%=request.getContextPath()%>/remove" data-toggle="modal" data-hover="LOGIN"  id="remid" style="display: none;"><span class="call">欢迎${sessionScope.sitesUser.userName}登录;</span> 点我注销!  </a>
             <a class="page-scroll" href="#myModal2" data-toggle="modal" data-hover="LOGIN" id="subid">登录</a>
+            <a class="page-scroll" href="#myModal4" onclick="phoneLogin()" data-toggle="modal" data-hover="LOGIN" id="phoneid">手机号快捷登陆</a>
             <a class="page-scroll" href="#myModal3" data-toggle="modal" data-hover="LOGIN"  id="regid">注册</a>
 
         </div>
@@ -843,8 +844,6 @@
 
 </body>
 <script type="text/javascript">
-
-
    $(function () {
         var sites=${sessionScope.sitesUser.id};
         if(sites!=null){

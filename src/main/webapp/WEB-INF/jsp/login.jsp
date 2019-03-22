@@ -33,6 +33,45 @@
         <input type="password" id="pwd"  name="userPwd" class="padding-wthree" placeholder="Password" required=""/>
         <input type="button" value="登陆" onclick="loginUser()" id="btnSumit">
     </form>
+    <font size="5">下方短信登录</font>
+    <!-- 短信登录 -->
+    <div class="tab-pane" id="ios">
+        <table>
+            <tr>
+                <td width="50px" height="30px"></td>
+                <td width="250px"></td>
+            </tr>
+            <tr>
+                <td height="80px"></td>
+                <td>
+                    <div class="input-group">
+                        <span class="input-group-addon" style="background-color: white;"><span class="glyphicon glyphicon-phone"></span></span>
+                        <input type="text" placeholder="请输入预留手机号" id="phone" class="form-control" style="width: 215px;height: 40px;">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td height="80px"></td>
+                <td>
+                    <div class="input-group">
+                        <span class="input-group-addon" style="background-color: white;"><span class="glyphicon glyphicon-lock"></span></span>
+                        <input type="text" placeholder="请输入验证码" id="checkCode" class="form-control" style="width: 120px;height: 40px;">
+                        <span class="input-group-addon" style="background-color: greenyellow;width: 200px;padding: 0px;">
+                            <input type="button" value="获取验证码"  id="btn"  onclick="getCheckCode()">
+                        </span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td height="80px"></td>
+                <td>
+                    <button  style="width: 250px;height: 40px;" onclick="checkCodeLogin()">
+                        <font size="3">登录</font>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 <div class="footer-agileits">
@@ -68,6 +107,55 @@
                 $.messager.alert("提示驾到","删除失败","error");
             }
         })
+    }
+
+    //获取验证码
+    function getCheckCode(){
+        var phone = $('#phone').val();
+        var id = 1;
+        $.ajax({
+            url:'<%=request.getContextPath()%>/http/getCode',
+            type:'post',
+            //dataType:'json',
+            aync:false,
+            data: {'phone':phone,"id":id},
+            success : function(data) {
+                if(data){
+                    alert("获取验证码中，60s内有效");
+                }else{
+
+                    alert("未正确获取验证码，请稍后重试！");
+                }
+            },
+            error : function(e){
+                alert("网络连接失败，请您稍后再试！");
+            }
+        });
+
+    }
+
+    //验证码登录
+    function checkCodeLogin(){
+        var phone = $('#phone').val();
+        var checkCode = $('#checkCode').val();
+        $.ajax({
+            url : "<%=request.getContextPath()%>/http/codeLogin",
+            async : true,
+            type: "POST",
+            data: {'phone':phone,'code':checkCode},
+            //dataType: "json",
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            success : function(data) {
+                if(data){
+                    setTimeout(function(){location.href="<%=request.getContextPath()%>/toMain"}, 1000);
+                }else{
+                    alert("验证码错误");
+                }
+            },
+            error : function(e){
+                alert("网络连接失败，请您稍后再试！");
+            }
+        });
     }
 
 </script>
