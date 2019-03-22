@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jk.mapper.TraMapper">
+
+    <!--查询+分页-->
+        <select id="queryTraList" resultType="com.jk.bean.TraBean">
+            select t.id as id,t.identity as identity,t.identity_img as identityImg,
+                    t.license as license,t.people as people,t.phone as phone,
+                    t.tra_name as traName,t.vehicle_img as vehicleImg
+                from t_Tra t
+            <include refid="queryPage"></include>
+              group by t.id
+                limit #{start},#{rows}
+        </select>
+
+    <!--查询总条数-->
+        <select id="queryTraListToal" parameterType="com.jk.bean.TraBean" resultType="long">
+            select count(*) from t_Tra t  <include refid="queryPage"></include>
+        </select>
+
+    <!--条查-->
+    <sql id="queryPage">
+        where 1 = 1
+        <if test="traBean.traName!=null and traBean.traName!=''">
+            and  t.tra_name like '%${traBean.traName}%'
+        </if>
+    </sql>
+
+    <!--批删+单删-->
+        <delete id="deleteTra" parameterType="string">
+            delete from  t_Tra where id in
+            <foreach collection="array" open="(" close=")" separator="," item="id">
+                #{id}
+            </foreach>
+        </delete>
+    <!--新增-->
+        <insert id="addTra" parameterType="com.jk.bean.TraBean" useGeneratedKeys="true" keyProperty="id">
+            insert into t_Tra(identity,identity_img,license,people,phone,tra_name,vehicle_img)
+                values(#{identity},#{identityImg},#{license},#{people},#{phone},#{traName},#{vehicleImg})
+
+        </insert>
+</mapper>

@@ -127,7 +127,6 @@
                     "label" : "<i class='glyphicon glyphicon-remove'></i> 取消",
                     "className" : "btn-sm btn-danger",
                     "callback" : function() {
-
                     }
                 }
             }
@@ -205,7 +204,8 @@
                     carsId:$("#carsId").val(),
                     oldId:$("#oldId").val(),
                     modelsId:$("#modelsId").val(),
-                    mileageId:$("#mileageId").val()
+                    mileageId:$("#mileageId").val(),
+                    displaceId:$("#displaceId").val()
                 };
             },
             sidePagination:'server',//分页方式：client客户端分页，server服务端分页
