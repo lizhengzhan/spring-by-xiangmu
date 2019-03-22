@@ -10,7 +10,7 @@ public class ToViewController {
 
     @RequestMapping("toLogin")
     public String toLogin(){
-        return "../login";
+        return "login";
     }
 
     @RequestMapping("toMain")

@@ -42,7 +42,7 @@ public class LoginController {
     }
 
     //注销
-    @RequestMapping("remove")
+    @RequestMapping("toRemove")
     public String remove(HttpSession session){
         session.removeAttribute("user");
         return "login";
