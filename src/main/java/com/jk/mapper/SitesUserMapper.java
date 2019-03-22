@@ -16,5 +16,8 @@ public interface SitesUserMapper {
     List<CompanyBean> querySitesUser(@Param("start") int start, @Param("rows") Integer rows, @Param("sitesUserBean")SitesUserBean sitesUserBean);
 
     //登录前端页面
-    SitesUserBean queryLogin(String userName);
+    SitesUserBean queryLogin(String userEmail);
+
+    //注册
+    void enroll(@Param("sites") SitesUserBean sitesUserBean);
 }

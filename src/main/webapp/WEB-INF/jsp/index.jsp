@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: kang
@@ -10,37 +11,37 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/normalize.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/home/elegant_font/style.css" />
-    <script src="<%=request.getContextPath()%>/home/elegant_font/lte-ie7.js"></script><![endif]-->
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/js/bootstrap3/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/magnific-popup.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/slider-pro.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/owl.carousel.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/owl.theme.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/owl.transitions.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/animate.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/home/elegant_font/style.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/home/css/style.css">
-
+    <link rel="shortcut icon" href="#">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
     function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //for-mobile-apps -->
-    <link href="<%=request.getContextPath()%>/homes/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="<%=request.getContextPath()%>/js/bootstrap3/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="<%=request.getContextPath()%>/homes/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="<%=request.getContextPath()%>/homes/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
-    <!--web-fonts-->
-    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
     <style  type="text/css">
         .main-menu{
 
             background-color: #0a0a0a;
         }
     </style>
+    <!-- 登陆框架 -->
+    <link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <%--
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/alter/example.scss">--%>
+    <!-- This is what you need -->
+    <script src="<%=request.getContextPath() %>/alter/sweet-alert.js"></script>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/alter/sweet-alert.css">
+
 
 </head>
 <body>
@@ -48,9 +49,10 @@
     <nav id="topNav" class="navbar navbar-default main-menu">
 
         <div class="top-nav-text">
-            <div class="nav-contact-w3ls"><span class="glyphicon glyphicon glyphicon-phone" aria-hidden="true"></span><p>Call us now <br> <span class="call">+0 111 222 333</span></p></div>
-            <a class="page-scroll" href="#myModal2" data-toggle="modal" data-hover="LOGIN">LOGIN</a>
-            <a class="page-scroll" href="#myModal3" data-toggle="modal" data-hover="LOGIN">REGISTER</a>
+            <a class="page-scroll" href="#myModal4" data-toggle="modal" data-hover="LOGIN"  id="remid" style="display: none;"><span class="call">欢迎${sessionScope.sitesUser.userName}登录;</span> 点我注销!  </a>
+            <a class="page-scroll" href="#myModal2" data-toggle="modal" data-hover="LOGIN" id="subid">登录</a>
+            <a class="page-scroll" href="#myModal3" data-toggle="modal" data-hover="LOGIN"  id="regid">注册</a>
+
         </div>
 
         <div class="container">
@@ -351,7 +353,7 @@
 
         </div>
     </div>
-    <div class="tlinks">Collect from <a href="http://www.cssmoban.com/" >建站模板</a></div>
+<%--    <div class="tlinks">Collect from <a href="http://www.cssmoban.com/" >建站模板</a></div>--%>
     <!-- Works -->
     <div class="portfolio-works wow fadeIn" data-wow-duration="2s">
 
@@ -683,6 +685,7 @@
 
             </div>
         </div>
+    </div>
 </section>
 
 
@@ -693,7 +696,7 @@
     <div class="container">
         <div class="row footer-containertent">
             <div class="col-md-4">
-                <img src="images/logo.png" alt="">
+                <img src="<%=request.getContextPath()%>/home/images/logo.png" alt="">
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et porro quos iste ratione doloribus asperiores, error omnis delectus rerum sapiente. Et, aliquam modi beatae quae in perferendis ab est fugiat!</p>
             </div>
             <div class="col-md-4">
@@ -742,8 +745,8 @@
 </footer>
 <!-- Footer End -->
 
-<script src="<%=request.getContextPath()%>/home/js/jquery-1.11.3.min.js"></script>
-<script src="<%=request.getContextPath()%>/home/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/jquery-easyui-1.5/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/bootstrap3/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/home/js/modernizr.min.js"></script>
 <script src="<%=request.getContextPath()%>/home/js/jquery.easing.1.3.js"></script>
 <script src="<%=request.getContextPath()%>/home/js/jquery.scrollUp.min.js"></script>
@@ -759,72 +762,132 @@
 <script src="<%=request.getContextPath()%>/home/js/jquery.magnific-popup.min.js"></script>
 <script src="<%=request.getContextPath()%>/home/js/jquery.sliderPro.min.js"></script>
 <script src="<%=request.getContextPath()%>/home/js/owl.carousel.min.js"></script>
-<script src="<%=request.getContextPath()%>/home/contact/jqBootstrapValidation.js"></script>
-<script src="<%=request.getContextPath()%>/home/contact/contact_me.js"></script>
 <script src="<%=request.getContextPath()%>/home/js/custom.js"></script>
 
+    <div class="modal about-modal w3-agileits fade" id="myModal2" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body login-page "><!-- login-page -->
+                    <div class="login-top sign-top">
+                        <div class="agileits-login">
+                            <h5>Login</h5>
+                            <form action="querySites" method="post">
+                                <input type="email" class="userEmail" name="userEmail" placeholder="userEmail" required=""/>
+                                <input type="password" class="password" name="password" placeholder="password" required=""/>
+                                <div class="wthree-text">
+                                    <ul>
+                                        <li>
+                                            <label class="anim">
+                                                <input type="checkbox" class="checkbox">
+                                                <span> Remember me ?</span>
+                                            </label>
+                                        </li>
+                                        <li> <a href="#">Forgot password?</a> </li>
+                                    </ul>
+                                    <div class="clearfix"> </div>
+                                </div>
+                                <div class="w3ls-submit">
+                                    <input type="submit" value="LOGIN"  >
 
-<div class="modal about-modal w3-agileits fade" id="myModal2" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body login-page "><!-- login-page -->
-                <div class="login-top sign-top">
-                    <div class="agileits-login">
-                        <h5>Login</h5>
-                        <form action="#" method="post" id="loginForm">
-                            <input type="email" class="userName" name="userName" placeholder="userName" required=""/>
-                            <input type="password" class="password" name="password" placeholder="password" required=""/>
-                            <div class="wthree-text">
-                                <ul>
-                                    <li>
-                                        <label class="anim">
-                                            <input type="checkbox" class="checkbox">
-                                            <span> Remember me ?</span>
-                                        </label>
-                                    </li>
-                                    <li> <a href="#">Forgot password?</a> </li>
-                                </ul>
-                                <div class="clearfix"> </div>
-                            </div>
-                            <div class="w3ls-submit">
-                                <input type="submit" value="LOGIN" onclick="queryLogin">
-                            </div>
-                        </form>
+                                </div>
+                            </form>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div> <!-- //login-page -->
+            </div> <!-- //login-page -->
+        </div>
     </div>
-</div>
+
+
+    <div class="modal about-modal w3-agileits fade" id="myModal3" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body login-page "><!-- login-page -->
+                    <div class="login-top sign-top">
+                        <div class="agileits-login">
+                            <h5>Register</h5>
+                            <form action="enroll" method="post"   id="indexFrom">
+                                <input type="text" name="Username" placeholder="userName" required=""/>
+                                <input type="email"  name="userEmail" placeholder="Email" required=""/>
+                                <input type="password" name="password" placeholder="Password" required=""/>
+                                <div class="wthree-text">
+                                    <ul>
+                                        <li>
+                                            <label class="anim">
+                                                <input type="checkbox" class="checkbox">
+                                                <span> I accept the terms of use</span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"> </div>
+                                </div>
+                                <div class="w3ls-submit">
+                                    <input type="submit" value="Register" >
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- //login-page -->
+        </div>
+    </div>
+
 
 </body>
 <script type="text/javascript">
-    //登录
-    function queryLogin(){
-        $("#loginForm").form("submit",{
-            url:"<%=request.getContextPath() %>/queryLogin",
+
+
+   $(function () {
+        var sites=${sessionScope.sitesUser.id};
+        if(sites!=null){
+            $("#subid").hide();
+            $("#regid").hide();
+            $("#remid").attr("style","display:block;");
+        }/*else{
+            $("#remid").hide();
+            /!*$("#remid").show();*!/
+           /!* $("#remid")[0].style.display = 'block';*!/
+        }*///alert(sites);
+
+    });
+
+
+    //按钮事件
+    $('#btnSumit').click(function() {
+    });
+    //回车提交事件
+    $("body").keydown(function() {
+        if (event.keyCode == "13") {//keyCode=13是回车键
+            $('#btnSumit').click();
+        }
+    });
+
+    function querySites(){
+        var userEmail = $("#userEmail").val();
+        var password = $("#password").val();
+        $.ajax({
+            url:"<%=request.getContextPath()%>/loginUser",
+            data:{"userEmail":userEmail,"password":password},
             success:function(data){
-                bootbox.alert({
-                    size: "small",
-                    title: "提示",
-                    message: "登录成功！",
-                    buttons: {
-                        ok: {
-                            label: '确定',
-                            className: 'btn-success'
-                        }
-                    },
-                    callback: function(){}
-                });
-                if(data=="登录成功"){
-                    location.href="<%=request.getContextPath() %>/aa";
+                swal(data, "", "error")
+                if(data == "登陆成功！"){
+                    swal(data, "", "success")
+                    setTimeout(function(){location.href="<%=request.getContextPath()%>/toError"}, 1000);
                 }
+            },
+            error:function(){
+                $.messager.alert("提示驾到","登录失败","error");
             }
         })
     }
+
 </script>
 </html>

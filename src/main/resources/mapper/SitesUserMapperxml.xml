@@ -27,9 +27,14 @@
     </select>
 
     <select id="queryLogin" parameterType="string" resultMap="ListMap">
-	select * from t_sites_user u where u.user_name = #{userName}
+	select * from t_sites_user u where u.user_email = #{userEmail}
   </select>
     <sql id="utilPage">
         where 1 = 1
     </sql>
+
+    <insert id="enroll" parameterType="com.jk.bean.SitesUserBean">
+        insert  into t_sites_user (crtime,password,user_email,user_name) values
+      (sysDate(),#{sites.password},#{sites.userEmail},#{sites.userName})
+    </insert>
 </mapper>

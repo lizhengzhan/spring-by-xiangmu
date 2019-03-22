@@ -34,12 +34,20 @@ public class LoginStopController implements HandlerInterceptor {
      * 进controller方法之前调用
      */
     public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2) throws Exception {
+        StringBuffer server = arg0.getRequestURL();
         UserBean user = (UserBean) arg0.getSession().getAttribute("user");
         if(user!=null){
             return true;
         }
         //转发到登录请求
-        System.out.println("拦截成功");
+        if(server.toString().contains(".css") || server.toString().contains(".js")
+                || server.toString().contains(".jpg") || server.toString().contains(".com")
+                || server.toString().contains(".png")|| server.toString().contains(".do")
+                || server.toString().contains(".ttf")|| server.toString().contains("error")
+                || server.toString().contains("logo.png") || server.toString().contains(".cur")){
+            return true;
+        }
+        /*System.out.println("拦截成功");*/
         arg0.getRequestDispatcher("login.jsp").forward(arg0, arg1);
         return false;
     }

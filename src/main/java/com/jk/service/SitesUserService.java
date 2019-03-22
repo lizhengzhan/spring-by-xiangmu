@@ -10,5 +10,8 @@ public interface SitesUserService {
     HashMap<String, Object> querySitesUser(Integer page, Integer rows, SitesUserBean  sitesUserBean);
 
     //登录前端页面
-    SitesUserBean  queryLogin(String userName);
+    SitesUserBean  queryLogin(String userEmail);
+
+    ///注册
+    void  enroll(SitesUserBean  sitesUserBean);
 }

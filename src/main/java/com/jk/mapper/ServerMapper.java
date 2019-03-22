@@ -1,6 +1,7 @@
 package com.jk.mapper;
 
 import com.jk.bean.ServerBean;
+import com.jk.bean.UserBean;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -10,17 +11,23 @@ public interface ServerMapper {
 
     @Select("select count(*) from t_server")
     Integer queryTotalCount();
-    @Select("select id as id, adress_id as adressId, auth_men as authMen, get_money as getMoney,make_money as makeMoney,order_id as orderId,status as status ,user_id as userId  from t_server limit #{start},#{rows} ")
+    @Select("select t.id as id, t1.fullName as area, t.auth_men as authMen, t.get_money as getMoney,t.make_money as makeMoney,t.order_id as orderId,t.status as status ,t.user_id as userId  from t_server t,kf_area t1 where t.adress_id = t1.id limit #{start},#{rows} ")
     List<ServerBean> queryListPage(@Param("start") int start, @Param("rows")int rows);
 
     @Insert("insert into t_server (adress_id,auth_men,get_money,make_money,order_id,status,user_id) values (#{adressId},#{authMen},#{getMoney},#{makeMoney},#{orderId},0,#{userId})")
     void addServer(ServerBean serverBean);
 
-    @Select("select id as id, adress_id as adressId, auth_men as authMen, get_money as getMoney,make_money as makeMoney,order_id as orderId,status as status ,user_id as userId  from t_server where id = #{id}")
+    @Select("select t.id as id, t1.fullName as area, t.auth_men as authMen, t.get_money as getMoney,t.make_money as makeMoney,t.order_id as orderId,t.status as status ,t.user_id as userId  from t_server t,kf_area t1 where t.adress_id = t1.id and t.id = #{id}")
     ServerBean queryServerById(Integer id);
     @Update("update t_server set adress_id = #{adressId},auth_men = #{authMen},get_money = #{getMoney},make_money = #{makeMoney},order_id = #{orderId},status = #{status},user_id = #{userId} where id = #{id}")
     void updateServer(ServerBean serverBean);
 
     @Delete("delete from t_server where id = #{parseInt}")
     void delServerById(int parseInt);
+
+    @Select("select t.username as userName from t_user t,t_server t1 where t.areapid = t1.adress_id and t1.id = #{id} and t.roleid = 1 limit 0,9")
+    List<UserBean> allotAuth(Integer id);
+
+    @Update("update t_server set status = 1 where id=#{id}")
+    void updateStatus(Integer id);
 }
