@@ -1,6 +1,7 @@
 package com.jk.controller;
 
 import com.jk.bean.ServerBean;
+import com.jk.bean.SitesUserBean;
 import com.jk.bean.UserBean;
 import com.jk.service.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,11 @@ public class ServerController {
     }
 
     @RequestMapping("addServer")
-    public void addServer(ServerBean serverBean){
-
+    public void addServer(ServerBean serverBean,HttpSession session){
+        SitesUserBean sitesUser = (SitesUserBean)session.getAttribute("sitesUser");
+        Integer id = sitesUser.getId();
+        serverBean.setUserId(id);
+        System.out.println(id);
         service.addServer(serverBean);
     }
 

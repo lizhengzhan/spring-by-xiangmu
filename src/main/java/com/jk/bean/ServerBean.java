@@ -36,6 +36,20 @@ public class ServerBean {
     @Transient
     private String area;
 
+    @Transient
+    private String userWang;
+
+    @Transient
+    private Integer pid;
+
+    public String getUserWang() {
+        return userWang;
+    }
+
+    public void setUserWang(String userWang) {
+        this.userWang = userWang;
+    }
+
     public String getArea() {
         return area;
     }
@@ -106,5 +120,13 @@ public class ServerBean {
 
     public void setGetMoney(String getMoney) {
         this.getMoney = getMoney;
+    }
+
+    public Integer getPid() {
+        return pid;
+    }
+
+    public void setPid(Integer pid) {
+        this.pid = pid;
     }
 }

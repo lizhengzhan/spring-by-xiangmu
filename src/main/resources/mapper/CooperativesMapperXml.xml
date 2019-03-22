@@ -3,7 +3,7 @@
 <mapper namespace="com.jk.mapper.CooperativesMapper">
 <select id="queryCooperatives" resultType="com.jk.bean.CooperativesBean">
 	SELECT kf.fullname,c.id AS id,c.capital AS capital,c.company_type AS companyType,c.credit AS credit,c.email AS email,c.info AS info,c.officer_net AS officerNet,c.organ AS organ,c.phone AS phone,c.registration AS registration,
-		   c.registration_number AS registrationNumber,c.site AS site,c.STATUS AS STATUS
+		   c.registration_number AS registrationNumber,c.STATUS AS STATUS
 	FROM  t_cooperatives c  left  join kf_area kf on c.city=kf.id where c.status=0
 	GROUP BY c.id  LIMIT #{start},#{rows}
 </select>
