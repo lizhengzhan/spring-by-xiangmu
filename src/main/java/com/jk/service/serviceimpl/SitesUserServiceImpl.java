@@ -36,8 +36,8 @@ public class SitesUserServiceImpl implements SitesUserService {
     }
 
     @Override
-    public String enroll(SitesUserBean sitesUserBean) {
+    public void enroll(SitesUserBean sitesUserBean) {
 
-        return sitesUserMapper.enroll(sitesUserBean);
+         sitesUserMapper.enroll(sitesUserBean);
     }
 }

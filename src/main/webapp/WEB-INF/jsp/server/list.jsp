@@ -60,9 +60,9 @@
             columns:[
                 {field:"check",checkbox:true},
                 {field:"id",title:"id"},
-                {field:"orderId",title:"订单id"},
+                {field:"orderId",title:"订单号"},
                 {field:"area",title:"车辆所在地址"},
-                {field:"userId",title:"网站用户ID"},
+                {field:"userWang",title:"网站用户"},
                 {field:"authMen",title:"认证人"},
                 {field:"status",title:"退车状态",
                     formatter: function(value,row,index){
@@ -125,7 +125,6 @@
     }
     //打开添加页面
     function openAdd(){
-        alert("12123123");
         bootbox.dialog({
             title:'添加用户信息',
             message: createAddContent("<%=request.getContextPath() %>/toServerAdd"),
@@ -216,11 +215,10 @@
                 //alert(data);
                 $("#id").val(data.id);
                 $("#orderId").val(data.orderId);
-                $("#input_province").append(data.area);
-                $("#adressId").append(data.area);
-                $("#userId").val(data.userId);
+                $("#grades").val(data.pid);
+                $("#areapids").val(data.adressId);
                 $("#authMen").val(data.authMen);
-                $("#status").val(data.status);
+                $("#userWang").val(data.userWang);
                 $("#makeMoney").val(data.makeMoney);
                 $("#getMoney").val(data.getMoney);
                 //});

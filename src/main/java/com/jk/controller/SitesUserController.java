@@ -4,6 +4,7 @@ package com.jk.controller;
 
 import com.jk.bean.SitesUserBean;
 import com.jk.service.SitesUserService;
+import com.jk.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +29,7 @@ public class SitesUserController {
     }
 
     //登录
-    @RequestMapping("queryLogin")
-    @ResponseBody
+    @RequestMapping("querySites")
     public String queryLogin(SitesUserBean  sitesUserBean, HttpSession session, HttpServletRequest request){
         //根据用户名查询用户信息
         SitesUserBean sitesUserBean2 = sitesUserService.queryLogin(sitesUserBean.getUserEmail());
@@ -38,26 +38,29 @@ public class SitesUserController {
             return "邮箱错误";
         }
         //验证密码
-        if(!sitesUserBean2.getPassword().equals(sitesUserBean.getPassword())){
+        if(!sitesUserBean2.getPassword().equals(MD5Util.getMD5(sitesUserBean.getPassword()))){
             return "密码错误";
         }
-        session.setAttribute("user", sitesUserBean2);
-        return "登录成功";
+        session.setAttribute("sitesUser", sitesUserBean2);
+        return "index";
     }
 
-   /* //注销
+
+    //注销
     @RequestMapping("remove")
     public String remove(HttpSession session){
-        session.removeAttribute("user");
-        return "../index";
-    }*/
+        session.removeAttribute("sitesUser");
+        return "index";
+    }
 
-		/*//注册
-		@RequestMapping("register")
-		@ResponseBody
-		public String register(User user){
-			return userService.register(user);
-		}*/
+
+		//注册
+		@RequestMapping("enroll")
+		public String enroll(SitesUserBean sitesUserBean,HttpServletRequest  request){
+            sitesUserBean.setPassword(MD5Util.getMD5(sitesUserBean.getPassword()));
+			 sitesUserService.enroll(sitesUserBean);
+			 return  "redirect:toIndex";
+		}
 
 
 }

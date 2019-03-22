@@ -13,5 +13,5 @@ public interface SitesUserService {
     SitesUserBean  queryLogin(String userEmail);
 
     ///注册
-    String  enroll(SitesUserBean  sitesUserBean);
+    void  enroll(SitesUserBean  sitesUserBean);
 }

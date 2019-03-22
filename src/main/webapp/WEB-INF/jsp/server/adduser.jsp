@@ -16,7 +16,7 @@
 		<form id="myForm">
 		  <div class="row">
 		  <div class="col-md-4">
-			    <label for="orderId">订单id:</label>
+			    <label for="orderId">订单号:</label>
 		  	</div>
 		  	<div class="col-md-8">
 			    <input type="text" class="form-control" name="orderId" id="orderId">
@@ -34,12 +34,6 @@
 					  <option value=""></option>
 				  </select>
 			  </div>
-			  <div class="col-md-4">
-				  <label for="userId">网站用户ID:</label>
-			  </div>
-			  <div class="col-md-8">
-				  <input type="text" class="form-control" name="userId" id="userId">
-			  </div><br>
 			  <div class="col-md-4">
 				  <label for="authMen">认证人:</label>
 			  </div>

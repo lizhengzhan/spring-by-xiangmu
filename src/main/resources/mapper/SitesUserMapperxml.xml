@@ -34,7 +34,7 @@
     </sql>
 
     <insert id="enroll" parameterType="com.jk.bean.SitesUserBean">
-        insert  into t_sites_user (baycars,city,crtime,password,province,sellcars,user_email,user_name,user_phone) values
-      (#{baycars},#{city},sysDate(),#{password},#{province},#{sellcars},#{userEmail},#{userName},#{userPhone})
+        insert  into t_sites_user (crtime,password,user_email,user_name) values
+      (sysDate(),#{sites.password},#{sites.userEmail},#{sites.userName})
     </insert>
 </mapper>

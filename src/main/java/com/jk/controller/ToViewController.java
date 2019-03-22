@@ -10,7 +10,7 @@ public class ToViewController {
 
     @RequestMapping("toLogin")
     public String toLogin(){
-        return "../login";
+        return "login";
     }
 
     @RequestMapping("toMain")
@@ -80,6 +80,13 @@ public class ToViewController {
     public  String  toBrand(){
         return  "brand/brandList";
     }
+
+    //跳转卖车查询页面
+    @RequestMapping("toBuying")
+    public String toBuying(){
+        return "buying/buyingList";
+    }
+
 
     //跳转买车新增页面
     @RequestMapping("toBrandAdd")

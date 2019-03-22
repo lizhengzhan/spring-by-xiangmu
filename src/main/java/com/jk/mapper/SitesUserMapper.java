@@ -19,5 +19,5 @@ public interface SitesUserMapper {
     SitesUserBean queryLogin(String userEmail);
 
     //注册
-    String enroll(SitesUserBean sitesUserBean);
+    void enroll(@Param("sites") SitesUserBean sitesUserBean);
 }

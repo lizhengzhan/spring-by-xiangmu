@@ -88,15 +88,7 @@
             }
         });
     });
-    //初始课程类型
- /*   function initBrandTable(){
-        $("#cars").dropdown({
-            url:"<%=request.getContextPath() %>/carsList",
-            valueField:"id",
-            textField:"carsName"
-            /!* multiple:true*!/
-        })
-    }*/
+
 
     var res;
     function createAddContent(url){

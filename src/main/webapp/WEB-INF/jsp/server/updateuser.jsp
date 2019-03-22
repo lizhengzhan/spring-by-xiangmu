@@ -19,10 +19,12 @@
 				<label for="id">id:</label>
 			</div>
 			<div class="col-md-8">
+				<input type="text" name="grades" id="grades" style="display: none">
+				<input type="text" name="areapids" id="areapids" style="display: none">
 				<input type="text" readonly="true" class="form-control" name="id" id="id">
 			</div><br>
 			<div class="col-md-4">
-				<label for="orderId">订单id:</label>
+				<label for="orderId">订单号:</label>
 			</div>
 			<div class="col-md-8">
 				<input type="text" class="form-control" name="orderId" id="orderId">
@@ -41,10 +43,10 @@
 				</select>
 			</div>
 			<div class="col-md-4">
-				<label for="userId">网站用户ID:</label>
+				<label for="userWang">网站用户:</label>
 			</div>
 			<div class="col-md-8">
-				<input type="text" class="form-control" name="userId" id="userId">
+				<input type="text" class="form-control" name="userWang" id="userWang">
 			</div><br>
 			<div class="col-md-4">
 				<label for="authMen">认证人:</label>
@@ -64,12 +66,6 @@
 			<div class="col-md-8">
 				<input type="text" class="form-control" name="getMoney" id="getMoney">
 			</div>
-			<div class="col-md-4">
-				<label for="status">状态:</label>
-			</div>
-			<div class="col-md-8">
-				<input type="text" class="form-control" name="status" id="status">
-			</div>
 		</div>
 	</form>
 </div>
@@ -87,6 +83,8 @@
 					html += "<option value=" + item.id + " >" + item.name + "</option>";
 				});
 				$("#input_province").append(html);
+				$("#input_province").val($("#grades").val());
+				$("#input_province").change();
 			}
 		});
 	});
@@ -95,13 +93,18 @@
 		if ($(this).val() == "") return;
 		$("#adressId option").remove();
 		var code = $(this).find("option:selected").val();
-		var html = "<option value=''>--请选择--</option>";
 		$.ajax({
 			url:"<%=request.getContextPath() %>/area/queryArea2?ids="+code,
 			type:"post",
 			success:function(data){
+				var areapids = $("#areapids").val();
+				var html = "<option value=''>--请选择--</option>";
 				$.each(data, function (idx, item) {
-					html += "<option value=" + item.id + " >" + item.name + "</option>";
+					if(areapids == item.id){
+						html += "<option value=" + item.id + " selected = 'selected'>" + item.name + "</option>";
+					}else {
+						html += "<option value=" + item.id + " >" + item.name + "</option>";
+					}
 				});
 				$("#adressId").append(html);
 			}
