@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.jk.mapper.BuyingMapper">
+
+    <!--查询分页-->
+    <select id="queryBuyingList" resultType="com.jk.bean.BuyingBean">
+     select y.*,b.brand_name as brandName,o.old_name as oldName from t_buying y
+	      left join t_brand b on y.brand_id = b.id
+	      left join t_old o on y.old_id = o.id
+	    group by y.id  limit #{start},#{rows}
+    </select>
+
+
+    <!--查询总条数-->
+    <select id="queryBuyingListToal" parameterType="com.jk.bean.BuyingBean" resultType="long">
+        select count(*) from t_buying y
+    </select>
+
+    <!--批删+单删-->
+    <delete id="deleteBuying" parameterType="string">
+        delete from  t_buying where id in
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

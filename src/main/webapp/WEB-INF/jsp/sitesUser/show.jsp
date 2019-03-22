@@ -70,7 +70,7 @@
                 {field:"id",title:"id"},
                 {field:"userName",title:"用户名称"},
                 {field:"password",title:"用户密码"},
-                {field:"userEmall",title:"用户邮箱"},
+                {field:"userEmail",title:"用户邮箱"},
                 {field:"userPhone",title:"用户电话"},
                 {field:"crtime",title:"注册时间"}
             ]

@@ -36,20 +36,23 @@
         <if test="brandBean.oldId!=null ">
             and  b.old_id like '%${brandBean.oldId}%'
         </if>
-        <if test="brandBean.modelsId!=null and brandBean.models Id!=''">
+        <if test="brandBean.modelsId!=null and brandBean.modelsId!=''">
             and  b.models_id like '%${brandBean.modelsId}%'
         </if>
         <if test="brandBean.mileageId!=null and brandBean.mileageId!=''">
             and  b.mileage_id like '%${brandBean.mileageId}%'
         </if>
-        <if test="brandBean.displaceId!=null">
+        <if test="brandBean.displaceId!=null and brandBean.mileageId!=''">
             and  b.displace_id like '%${brandBean.displaceId}%'
         </if>
     </sql>
 
     <!--批删+单删-->
-    <delete id="deleteBrand" parameterType="int">
-        delete from t_brand where id=#{id}
+    <delete id="deleteBrand" parameterType="string">
+        delete from  t_brand where id in
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
     </delete>
 
     <!--新增-->

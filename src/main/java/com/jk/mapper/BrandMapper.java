@@ -18,7 +18,6 @@ public interface BrandMapper {
      * @param brand
      * @return
      */
-    /*@Select("select count(*) from t_brand")*/
     long queryBrandListToal(@Param("brandBean")BrandBean brandBean);
 
     /**
@@ -28,14 +27,6 @@ public interface BrandMapper {
      * @param brandBean
      * @return
      */
-    /*@Select("select b.*,o.old_name as oldName,c.cars_name as carsName,m.models_name as modelsName,\n" +
-            "m1.mileage_name as mileageName,d.displacement_name as displaceName,b.brand_name as brandName from t_brand b\n" +
-            "left join t_cars c on b.cars_id = c.id\n" +
-            "left join t_old o on b.old_id = o.id\n" +
-            "left join t_models m on b.models_id = m.id\n" +
-            "left join t_mileage m1 on b.mileage_id = m1.id\n" +
-            "left join t_displace d on b.displace_id = d.id\n" +
-            "group by b.id  limit #{start},#{rows}")*/
     List<BrandBean> queryBrandList(@Param("start") int start, @Param("rows") Integer rows, @Param("brandBean") BrandBean brandBean);
 
 
