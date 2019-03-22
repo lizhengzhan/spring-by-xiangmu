@@ -80,6 +80,13 @@ public class ToViewController {
         return  "brand/brandList";
     }
 
+    //跳转卖车查询页面
+    @RequestMapping("toBuying")
+    public String toBuying(){
+        return "buying/buyingList";
+    }
+
+
     //跳转买车新增页面
     @RequestMapping("toBrandAdd")
     public String toBrandAdd(){
