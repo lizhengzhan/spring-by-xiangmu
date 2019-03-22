@@ -104,7 +104,7 @@ public class JinRongController {
         return jinRongService.queryYiChuLiByKeFuId(id);
     }
 
-    @RequestMapping("toUpdateYuYue")
+    @RequestMapping("toUpdateYuYue1")
     public String toUpdateYuYue(){
         return "jinrong/updateYuYue";
     }
