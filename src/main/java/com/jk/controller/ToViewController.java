@@ -145,6 +145,9 @@ public class ToViewController {
         return  "error";
     }
 
+
+
+
     @RequestMapping("toLog")
     public String toLog(){
         return "log/list";
@@ -154,4 +157,11 @@ public class ToViewController {
     public String toLodge(){
         return "lodge/list";
     }
+    @RequestMapping("toShow")
+    public  String   toShow(){
+        return  "aa";
+
+    }
+
+
 }

@@ -844,18 +844,14 @@
 
 </body>
 <script type="text/javascript">
+
    $(function () {
         var sites=${sessionScope.sitesUser.id};
         if(sites!=null){
             $("#subid").hide();
             $("#regid").hide();
             $("#remid").attr("style","display:block;");
-        }/*else{
-            $("#remid").hide();
-            /!*$("#remid").show();*!/
-           /!* $("#remid")[0].style.display = 'block';*!/
-        }*///alert(sites);
-
+        }
     });
 
 
