@@ -149,4 +149,9 @@ public class ToViewController {
     public String toLog(){
         return "log/list";
     }
+
+    @RequestMapping("toLodge")
+    public String toLodge(){
+        return "lodge/list";
+    }
 }

@@ -14,7 +14,13 @@ spring:
       prefix: /WEB-INF/jsp/
   data:
     mongodb:
-      uri: mongodb://127.0.0.1:27017/1807b
+      uri: mongodb://192.168.1.157:27017/1807b
+  redis:
+    password:
+    database: 0
+    timeout: 0
+    host: 192.168.1.157
+    port: 6379
 server:
   port: 8088
   servlet:
