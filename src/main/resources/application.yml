@@ -25,7 +25,7 @@ spring:
     solr:
       host: http://127.0.0.1:8082/solr
 server:
-  port: 8088
+  port: 8098
   servlet:
     context-path: /app
 

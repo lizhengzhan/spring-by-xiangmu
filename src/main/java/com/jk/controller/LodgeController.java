@@ -18,6 +18,7 @@ public class LodgeController {
 
     @Autowired
     private MongoTemplate mongoTemplate;
+
     @Resource(name="redisTemplate")
     private RedisTemplate<String,List<LodgeBean>> redisTemplate;
 
