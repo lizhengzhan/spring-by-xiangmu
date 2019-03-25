@@ -42,7 +42,7 @@
         <if test="brandBean.mileageId!=null and brandBean.mileageId!=''">
             and  b.mileage_id like '%${brandBean.mileageId}%'
         </if>
-        <if test="brandBean.displaceId!=null and brandBean.mileageId!=''">
+        <if test="brandBean.displaceId!=null and brandBean.displaceId!=''">
             and  b.displace_id like '%${brandBean.displaceId}%'
         </if>
     </sql>
@@ -57,7 +57,7 @@
 
     <!--新增-->
     <insert id="addBrand" parameterType="com.jk.bean.BrandBean" useGeneratedKeys="true" keyProperty="id">
-        insert into t_brand(brandName,carsId,oldId,modelsId,mileageId,displaceId)
+        insert into t_brand(brand_name,cars_id,old_id,models_id,mileage_id,displace_id)
             values(#{brandName},#{carsId},#{oldId},#{modelsId},#{mileageId},#{displaceId})
     </insert>
 </mapper>
