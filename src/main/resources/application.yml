@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.1.157:3306/qiche
+    url: jdbc:mysql://192.168.1.122:3306/qiche
     username: root
     password: 123
   jpa:
@@ -14,16 +14,16 @@ spring:
       prefix: /WEB-INF/jsp/
   data:
     mongodb:
-      uri: mongodb://192.168.1.157:27017/1807b
+      uri: mongodb://192.168.1.122:27017/1807b
   redis:
     password:
     database: 0
     timeout: 0
-    host: 192.168.1.157
+    host: 192.168.1.122
     port: 6379
 
     solr:
-      host: http://127.0.0.1:8082/solr
+      host: http://192.168.1.112:8082/solr
 server:
   port: 8098
   servlet:

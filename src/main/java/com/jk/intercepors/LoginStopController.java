@@ -48,7 +48,7 @@ public class LoginStopController implements HandlerInterceptor {
             return true;
         }
         /*System.out.println("拦截成功");*/
-        arg0.getRequestDispatcher("login.jsp").forward(arg0, arg1);
+        arg0.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(arg0, arg1);
         return false;
     }
 }

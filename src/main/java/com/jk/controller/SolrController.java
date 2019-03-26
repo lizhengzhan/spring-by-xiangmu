@@ -122,7 +122,7 @@ public class SolrController {
 
     /**
      * 修改信息
-     * @param car
+     *
      */
     @RequestMapping("/updateCar")
     @ResponseBody
