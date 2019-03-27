@@ -116,7 +116,7 @@ public class SolrController {
         Time  time = new Time();
         time.setId((String)document.get("id"));
         time.setName((String)document.get("product_title"));
-        time.setRtime((String)document.get("product_point"));
+        time.setRtime((String)document.get("product_point")); ;
         return time;
     }
 
